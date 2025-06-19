@@ -1,0 +1,8 @@
+User-agent: *
+Disallow: /
+Host: https://paslugi.ru
+Sitemap: https://paslugi.ru/sitemap.xml
+Disallow: /media/
+Disallow: /temp/
+Disallow: /templates/
+Disallow: /*?*
