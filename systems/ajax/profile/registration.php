@@ -2,6 +2,14 @@
 
 $error = [];
 
+$user_name = clear($_POST["user_name"]);
+$user_age = (int)$_POST["user_age"];
+$user_gender = clear($_POST["user_gender"]);
+$user_role = clear($_POST["user_role"]);
+$user_city = clear($_POST["user_city"]);
+$user_email_field = clear($_POST["user_email"]);
+$_SESSION["reg_fields"] = ["name"=>$user_name,"age"=>$user_age,"gender"=>$user_gender,"role"=>$user_role,"city"=>$user_city,"email"=>$user_email_field];
+
 $user_login = clear($_POST["user_login"]);
 
 if($settings["registration_method"] == 1){

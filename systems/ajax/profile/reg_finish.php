@@ -3,6 +3,18 @@
 $error = [];
 
 $user_login = clear( $_POST["user_login"] );
+$user_age = (int)$_POST["user_age"];
+$user_gender = clear($_POST["user_gender"]);
+$user_role = clear($_POST["user_role"]);
+$user_city = clear($_POST["user_city"]);
+$user_email_field = clear($_POST["user_email"]);
+$user_photo = clear($_POST["user_photo"]);
+$user_description = clear($_POST["user_description"]);
+$user_preferences = clear($_POST["user_preferences"]);
+$user_phone_unique = clear($_POST["user_phone"]);
+$user_social = clear($_POST["user_social"]);
+$user_gesture = clear($_POST["user_gesture"]);
+
 $user_name = clear( $_POST["user_name"] );
 $user_code_login = (int)$_POST["user_code_login"];
 $user_pass = clear( $_POST["user_pass"] );
@@ -71,7 +83,25 @@ if(!$user_name){
 
 if( !$error ){
 
- $result = $Profile->auth_reg(array("method"=>$settings["registration_method"],"email"=>$user_email,"phone"=>$user_phone,"name"=>$user_name, "activation" => 1, "pass" => $user_pass));
+ $result = $Profile->auth_reg([
+    "method"=>$settings["registration_method"],
+    "email"=>$user_email,
+    "phone"=>$user_phone,
+    "name"=>$user_name,
+    "activation" => 0,
+    "pass" => $user_pass,
+    "age"=>$user_age,
+    "gender"=>$user_gender,
+    "role"=>$user_role,
+    "city"=>$user_city,
+    "email_field"=>$user_email_field,
+    "photo"=>$user_photo,
+    "description"=>$user_description,
+    "preferences"=>$user_preferences,
+    "phone_unique"=>$user_phone_unique,
+    "social_links"=>$user_social,
+    "gesture"=>$user_gesture
+ ]);
 
  echo json_encode( array( "status"=>$result["status"],"answer" => $result["answer"], "reg" => 1, "location" => _link( "user/".$result["data"]["clients_id_hash"] ) ) );
 

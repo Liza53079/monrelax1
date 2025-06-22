@@ -127,17 +127,54 @@
       <button class="button-style-custom schema-color-button color-green action-reg-verify mt20" ><?php echo $ULang->t("Продолжить"); ?></button>                   
     </div>
 
+
     <div class="auth-block-right-box-tab-1-3" >
 
-      <input type="text"  class="form-control input-style2-custom" placeholder="<?php echo $ULang->t("Ваше имя"); ?>" name="user_name">
-      <div class="msg-error mb10" data-name="user_name" ></div>
+      <div class="reg-step reg-step-1" >
+        <input type="text"  class="form-control input-style2-custom" placeholder="<?php echo $ULang->t('Ваше имя'); ?>" name="user_name">
+        <div class="msg-error mb10" data-name="user_name" ></div>
 
-      <input type="password"  class="form-control input-style2-custom" placeholder="<?php echo $ULang->t("Пароль"); ?>" maxlength="25" name="user_pass">
-      <div class="msg-error mb10" data-name="user_pass" ></div>
+        <input type="number"  class="form-control input-style2-custom" placeholder="<?php echo $ULang->t('Возраст'); ?>" name="user_age">
+        <div class="msg-error mb10" data-name="user_age" ></div>
 
-      <button class="button-style-custom schema-color-button color-green action-reg-finish mt20" ><?php echo $ULang->t("Завершить регистрацию"); ?></button>           
+        <input type="text"  class="form-control input-style2-custom" placeholder="<?php echo $ULang->t('Пол'); ?>" name="user_gender">
+        <div class="msg-error mb10" data-name="user_gender" ></div>
+
+        <input type="text"  class="form-control input-style2-custom" placeholder="<?php echo $ULang->t('Роль'); ?>" name="user_role">
+        <div class="msg-error mb10" data-name="user_role" ></div>
+
+        <input type="text"  class="form-control input-style2-custom" placeholder="<?php echo $ULang->t('Город'); ?>" name="user_city">
+        <div class="msg-error mb10" data-name="user_city" ></div>
+
+        <input type="text"  class="form-control input-style2-custom" placeholder="<?php echo $ULang->t('E-mail'); ?>" name="user_email">
+        <div class="msg-error mb10" data-name="user_email" ></div>
+
+        <button class="button-style-custom schema-color-button color-green action-reg-step1 mt20" ><?php echo $ULang->t('Продолжить'); ?></button>
+      </div>
+
+      <div class="reg-step reg-step-2" style="display:none;" >
+        <input type="file" class="form-control mb10" name="user_photo">
+        <textarea class="form-control input-style2-custom" placeholder="<?php echo $ULang->t('Описание'); ?>" name="user_description"></textarea>
+        <div class="msg-error mb10" data-name="user_description" ></div>
+
+        <input type="text"  class="form-control input-style2-custom" placeholder="<?php echo $ULang->t('Предпочтения'); ?>" name="user_preferences">
+        <div class="msg-error mb10" data-name="user_preferences" ></div>
+
+        <input type="text"  class="form-control input-style2-custom" placeholder="<?php echo $ULang->t('Телефон'); ?>" name="user_phone">
+        <div class="msg-error mb10" data-name="user_phone" ></div>
+
+        <input type="password"  class="form-control input-style2-custom" placeholder="<?php echo $ULang->t('Пароль'); ?>" maxlength="25" name="user_pass">
+        <div class="msg-error mb10" data-name="user_pass" ></div>
+
+        <input type="text"  class="form-control input-style2-custom" placeholder="<?php echo $ULang->t('Ссылки на соцсети'); ?>" name="user_social">
+        <div class="msg-error mb10" data-name="user_social" ></div>
+
+        <input type="file" class="form-control mb10" name="user_gesture">
+
+        <button class="button-style-custom schema-color-button color-green action-reg-finish mt20" ><?php echo $ULang->t('Завершить регистрацию'); ?></button>
+      </div>
+
     </div>
-
     <?php if($settings["authorization_social"]){ ?>
 
     <div class="mt20" ></div>

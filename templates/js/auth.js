@@ -175,15 +175,35 @@ $(document).ready(function () {
       e.preventDefault();
 
    });
+   $(document).on("click",".action-reg-step1", function (e) {
+      $(".reg-step-1").hide();
+      $(".reg-step-2").show();
+   });
 
-   $(document).on('click','.action-reg-finish', function (e) {  
+
+  $(document).on('click','.action-reg-finish', function (e) {
       
       $(".msg-error").hide();
       var this_ = $(this);
       
       showLoadProcess(this_);
 
-      $.ajax({type: "POST",url: url_path + "systems/ajax/controller.php",data: "user_login=" + $(".auth-block-tab-reg input[name=user_login]").val() + "&user_code_login=" + $(".auth-block-tab-reg input[name=user_code_login]").val() + "&user_pass=" + $(".auth-block-tab-reg input[name=user_pass]").val() + "&user_name=" + $(".auth-block-tab-reg input[name=user_name]").val() + "&action=profile/reg_finish",dataType: "json",cache: false,success: function (data) { 
+      $.ajax({type: "POST",url: url_path + "systems/ajax/controller.php",data: "user_login=" + $(".auth-block-tab-reg input[name=user_login]").val() +
+               "&user_code_login=" + $(".auth-block-tab-reg input[name=user_code_login]").val() +
+               "&user_pass=" + $(".auth-block-tab-reg input[name=user_pass]").val() +
+               "&user_name=" + $(".auth-block-tab-reg input[name=user_name]").val() +
+               "&user_age=" + $(".auth-block-tab-reg input[name=user_age]").val() +
+               "&user_gender=" + $(".auth-block-tab-reg input[name=user_gender]").val() +
+               "&user_role=" + $(".auth-block-tab-reg input[name=user_role]").val() +
+               "&user_city=" + $(".auth-block-tab-reg input[name=user_city]").val() +
+               "&user_email=" + $(".auth-block-tab-reg input[name=user_email]").val() +
+               "&user_photo=" + $(".auth-block-tab-reg input[name=user_photo]").val() +
+               "&user_description=" + $(".auth-block-tab-reg textarea[name=user_description]").val() +
+               "&user_preferences=" + $(".auth-block-tab-reg input[name=user_preferences]").val() +
+               "&user_phone=" + $(".auth-block-tab-reg input[name=user_phone]").val() +
+               "&user_social=" + $(".auth-block-tab-reg input[name=user_social]").val() +
+               "&user_gesture=" + $(".auth-block-tab-reg input[name=user_gesture]").val() +
+               "&action=profile/reg_finish",dataType: "json",cache: false,success: function (data) {
 
          if( data["status"] == true ){
             
