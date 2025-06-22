@@ -367,6 +367,8 @@ class Profile{
 
            insert("INSERT INTO uni_chat_messages(chat_messages_text,chat_messages_date,chat_messages_id_hash,chat_messages_id_user,chat_messages_action,chat_messages_attach,chat_messages_id_responder)VALUES(?,?,?,?,?,?,?)", array($encrypt_text, date("Y-m-d H:i:s"),$param["id_hash"],$param["user_from"],intval($param["action"]),json_encode($attach),intval($param["id_responder"])));
 
+           $this->recordChatSent($param["user_from"]);
+
            
            if($param["firebase"] && $param["action"] == 0){
                if(!$param["support"]){
@@ -2190,7 +2192,54 @@ class Profile{
           }
 
        }
-       return $groupByUsers;        
+       return $groupByUsers;
+    }
+
+    // Chat limit helpers
+    function getChatBalance($userId=0){
+       $get = findOne('uni_clients','clients_id=?',[$userId]);
+       return (int)($get['clients_chat_balance'] ?? 0);
+    }
+
+    function addChatBalance($userId=0,$count=0){
+       update('update uni_clients set clients_chat_balance=clients_chat_balance+? where clients_id=?',[$count,$userId]);
+    }
+
+    function getDailyChatUsed($userId=0,$date=''){
+       if(!$date) $date = date('Y-m-d');
+       $get = findOne('uni_chat_limits','user_id=? and date=?',[$userId,$date]);
+       if(!$get){
+          insert('INSERT INTO uni_chat_limits(user_id,date,messages_sent,contacts_used)VALUES(?,?,?,0)',[$userId,$date,0]);
+          return 0;
+       }
+       return (int)$get['messages_sent'];
+    }
+
+    function incrementDailyChatUsed($userId=0,$date=''){
+       if(!$date) $date = date('Y-m-d');
+       $get = findOne('uni_chat_limits','user_id=? and date=?',[$userId,$date]);
+       if(!$get){
+          insert('INSERT INTO uni_chat_limits(user_id,date,messages_sent,contacts_used)VALUES(?,?,?,0)',[$userId,$date,1]);
+       }else{
+          update('update uni_chat_limits set messages_sent=messages_sent+1 where id=?',[$get['id']]);
+       }
+    }
+
+    function canSendChat($userId=0,$date=''){
+       $balance = $this->getChatBalance($userId);
+       $dailyUsed = $this->getDailyChatUsed($userId,$date);
+       if($balance > 0) return true;
+       if($dailyUsed < 30) return true;
+       return false;
+    }
+
+    function recordChatSent($userId=0,$date=''){
+       $balance = $this->getChatBalance($userId);
+       if($balance > 0){
+          update('update uni_clients set clients_chat_balance=clients_chat_balance-1 where clients_id=?',[$userId]);
+       }else{
+          $this->incrementDailyChatUsed($userId,$date);
+       }
     }
 
     function getUserStories($category_id=0){
