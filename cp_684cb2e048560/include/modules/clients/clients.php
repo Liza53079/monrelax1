@@ -10,12 +10,12 @@ $_GET["page"] = empty($_GET["page"]) ? 1 : intval($_GET["page"]);
 $url[] = "route=clients";
 
 if($_GET['sort'] == 1){
-    $query = "clients_status=1"; 
-    $sort_name = "Активные";  
-}elseif ($_GET['sort'] == 2){                    
-    $query = "clients_status=0";  
-    $sort_name = "Не подтвержденные";                          
-}elseif ($_GET['sort'] == 3){                    
+    $query = "is_active=1";
+    $sort_name = "Активные";
+}elseif ($_GET['sort'] == 2){
+    $query = "is_active=0";
+    $sort_name = "Не активные";
+}elseif ($_GET['sort'] == 3){
     $query = "clients_status=2";  
     $sort_name = "Заблокированные";                          
 }elseif ($_GET['sort'] == 4){                    
@@ -41,7 +41,7 @@ if($_GET["search"]){
 if($query){
    $query = " where $query";
 }else{
-   $query = " where clients_status!=3";
+   $query = " where is_active=1";
 }
 
 $LINK = "?".implode("&",$url);
@@ -51,7 +51,7 @@ $LINK = "?".implode("&",$url);
 <div class="row">
    <div class="page-header">
       <div class="d-flex align-items-center">
-         <h2 class="page-header-title">Пользователи (<?php echo (int)getOne("select count(*) as total from uni_clients where clients_status!='3'")["total"]; ?>)</h2>
+         <h2 class="page-header-title">Пользователи (<?php echo (int)getOne("select count(*) as total from uni_clients where is_active=1")["total"]; ?>)</h2>
       </div>
    </div>
 </div>
@@ -88,7 +88,7 @@ $LINK = "?".implode("&",$url);
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
       <a class="dropdown-item" href="?route=clients">Без сортировки</a>
       <a class="dropdown-item" href="?route=clients&sort=1">Активные</a>
-      <a class="dropdown-item" href="?route=clients&sort=2">Не подтвержденные</a>
+      <a class="dropdown-item" href="?route=clients&sort=2">Не активные</a>
       <a class="dropdown-item" href="?route=clients&sort=3">Заблокированные</a>
       <a class="dropdown-item" href="?route=clients&sort=5">Верифицированные</a>
       <a class="dropdown-item" href="?route=clients&sort=6">Не верифицированные</a>

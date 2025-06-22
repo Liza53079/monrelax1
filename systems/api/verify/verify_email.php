@@ -29,7 +29,12 @@ if($getVerify){
 
        }
 
-       update('update uni_clients set clients_email=? where clients_id=?', [$email,$idUser]);
+       update('update uni_clients set clients_email=?, is_email_verified=1 where clients_id=?', [$email,$idUser]);
+
+       $user = findOne('uni_clients','clients_id=?',[$idUser]);
+       if($user['is_phone_verified']){
+           update('update uni_clients set is_active=1 where clients_id=?',[$idUser]);
+       }
        update('delete from uni_verify_code where id=?', [$getVerify['id']]);
        
        echo json_encode(['status'=>true]);

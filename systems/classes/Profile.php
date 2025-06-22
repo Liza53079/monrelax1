@@ -10,6 +10,11 @@
 
 class Profile{
 
+    const STATUS_DRAFT = 'draft';
+    const STATUS_PENDING = 'pending';
+    const STATUS_VERIFIED = 'verified';
+    const STATUS_REJECTED = 'rejected';
+
     function oneUser($query = "", $param = []){
 
         return getOne("SELECT * FROM uni_clients LEFT JOIN `uni_city` ON `uni_city`.city_id = `uni_clients`.clients_city_id $query ",$param);
