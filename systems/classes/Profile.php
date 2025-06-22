@@ -821,7 +821,34 @@ class Profile{
      
      $clients_id_hash = md5($array["email"] ? $array["email"] : $array["phone"]);
 
-     $insert_id = insert("INSERT INTO uni_clients(clients_pass,clients_email,clients_phone,clients_name,clients_surname,clients_ip,clients_id_hash,clients_status,clients_datetime_add,clients_notifications,clients_social_identity,clients_avatar,clients_ref_id,clients_verification_code)VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)", array($password_hash,$array["email"],$array["phone"],$array["name"],$array["surname"],clear($_SERVER["REMOTE_ADDR"]),$clients_id_hash,intval($array["activation"]), date("Y-m-d H:i:s"), $notifications,$array["social_link"],$array["avatar"],genRefId(),genVerificationCode())); 
+     $insert_id = smart_insert('uni_clients', [
+        'clients_pass' => $password_hash,
+        'clients_email' => $array['email'],
+        'clients_phone' => $array['phone'],
+        'clients_name' => $array['name'],
+        'clients_surname' => $array['surname'],
+        'clients_ip' => clear($_SERVER['REMOTE_ADDR']),
+        'clients_id_hash' => $clients_id_hash,
+        'clients_status' => 0,
+        'clients_datetime_add' => date('Y-m-d H:i:s'),
+        'clients_notifications' => $notifications,
+        'clients_social_identity' => $array['social_link'],
+        'clients_avatar' => $array['avatar'],
+        'clients_ref_id' => genRefId(),
+        'clients_verification_code' => genVerificationCode(),
+        'gender' => $array['gender'],
+        'role' => $array['role'],
+        'preferred_gender' => $array['preferences'],
+        'age' => $array['age'],
+        'social_links' => $array['social_links'],
+        'verify_gesture' => $array['gesture'],
+        'verify_photo' => $array['photo'],
+        'description' => $array['description'],
+        'city' => $array['city'],
+        'phone' => $array['phone_unique'],
+        'is_email_verified' => 0,
+        'is_phone_verified' => 0
+     ]);
 
      $_SESSION['profile']['id'] = $insert_id;
 

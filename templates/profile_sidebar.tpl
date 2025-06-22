@@ -12,13 +12,13 @@
         <div class="user-card-company-name" ><?php echo $user["clients_name_company"]; ?></div>
         <?php
     }
-    if($user["clients_verification_status"]){
+    if($user["is_phone_verified"] || $user["is_email_verified"] || $user["clients_verification_status"]){
         ?>
         <div class="user-card-verification-box">
             <span class="user-card-verification-status" ><?php echo $ULang->t("Профиль подтвержден"); ?></span>
-            <div><i class="las la-check"></i> <?php echo $ULang->t("Телефон подтверждён"); ?></div> 
-            <div><i class="las la-check"></i> <?php echo $ULang->t("Email подтверждён"); ?></div> 
-            <div><i class="las la-check"></i> <?php echo $ULang->t("Документы и фото проверены"); ?></div>                              
+            <?php if($user["is_phone_verified"]){ ?><div><i class="las la-check"></i> <?php echo $ULang->t("Телефон подтверждён"); ?></div><?php } ?>
+            <?php if($user["is_email_verified"]){ ?><div><i class="las la-check"></i> <?php echo $ULang->t("Email подтверждён"); ?></div><?php } ?>
+            <?php if($user["clients_verification_status"]){ ?><div><i class="las la-check"></i> <?php echo $ULang->t("Документы и фото проверены"); ?></div><?php } ?>
         </div>
         <?php
     }else{

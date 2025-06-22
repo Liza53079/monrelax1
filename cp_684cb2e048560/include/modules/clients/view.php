@@ -207,11 +207,18 @@ $data["requisites_company"] = $getUser['clients_requisites_company'] ? json_deco
                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                            <a class="dropdown-item view-change-status-verification-user" data-id="<?php echo $getUser["clients_id"]; ?>" data-status="1" href="#">Подтвержден</a>
                            <a class="dropdown-item view-change-status-verification-user" data-id="<?php echo $getUser["clients_id"]; ?>" data-status="0" href="#">Не подтвержден</a>
-                           </div>
+                          </div>
 
-                        </div>                         
-                      </div>
-                   </div>
+                       </div>
+                     </div>
+                  </div>
+                  <div class="form-group row d-flex align-items-center mb-5" >
+                     <label class="col-lg-2 form-control-label d-flex justify-content-lg-end">Подтверждения</label>
+                     <div class="col-lg-6">
+                        <?php if($getUser["is_email_verified"]){ ?><span class="badge badge-success mr5">Email</span><?php } ?>
+                        <?php if($getUser["is_phone_verified"]){ ?><span class="badge badge-success mr5">Телефон</span><?php } ?>
+                     </div>
+                  </div>
 
                   <?php
                   
