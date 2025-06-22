@@ -270,11 +270,15 @@
 			 		</div>
 
 			 </div>
-			 <div class="chat-dialog-text-flex-box2" >
+                        <div class="chat-dialog-text-flex-box2" >
 
-					<textarea <?php if($getMyLocked || $getAd["ads_status"] == 8){ echo 'disabled=""'; } ?> maxlength="1000" class="chat-dialog-text chat-dialog-send" placeholder="<?php echo $ULang->t("Напишите сообщение..."); ?>" ></textarea>
+                                        <textarea <?php if($getMyLocked || $getAd["ads_status"] == 8){ echo 'disabled=""'; } ?> maxlength="1000" class="chat-dialog-text chat-dialog-send" placeholder="<?php echo $ULang->t("Напишите сообщение..."); ?>" ></textarea>
 
-			 </div>
+                                        <div class="chat-limit-warning" style="display:none;">
+                                            <?php echo $ULang->t("Дневной лимит сообщений исчерпан. Приобретите пакет, чтобы продолжить общение."); ?>
+                                        </div>
+
+                        </div>
 			 <div class="chat-dialog-text-flex-box3" >
 
 			 		<div class="chat-dialog-text-send" >

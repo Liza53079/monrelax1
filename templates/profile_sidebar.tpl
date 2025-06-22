@@ -5,7 +5,7 @@
     <?php } ?>
     <img src="<?php echo $Profile->userAvatar($user, false); ?>" />
  </div>  
- <h4> <?php echo $Profile->name($user, false); ?> </h4>  
+ <h4> <?php echo $Profile->name($user, false); ?><?php if($user['clients_verification_status']){ ?><span class="verification-badge"><i class="las la-badge-check"></i></span><?php } ?> </h4>
  <?php
     if($user["clients_type_person"] == 'company'){
         ?>
@@ -48,9 +48,15 @@
 
    <a href="<?php echo _link( "user/" . $user["clients_id_hash"] . "/reviews" ); ?>" >(<?php echo $countReviews; ?>)</a>
 
-   <div class="clr"></div>   
+  <div class="clr"></div>
 
- </div>
+</div>
+
+<?php if(!$data["advanced"]){ ?>
+<div class="mt10">
+   <a href="#" class="btn-custom-mini btn-color-gradient open-modal" data-id-modal="modal-send-gift"><i class="las la-gift"></i> <?php echo $ULang->t("Отправить подарок"); ?></a>
+</div>
+<?php } ?>
 
 </div>
 

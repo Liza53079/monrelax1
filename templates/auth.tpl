@@ -27,37 +27,37 @@
            <div class="auth-block-left" >
 
               <h4 class="auth-left-box-title" ><?php echo $settings["title"]; ?></h4>
-              <p class="auth-left-box-desc" ><?php echo $ULang->t("Удобный сервис, который позволяет быстро и безопасно продавать и покупать товары онлайн."); ?></p>
+              <p class="auth-left-box-desc" ><?php echo $ULang->t("Добро пожаловать в клуб знакомств. Общайтесь и находите новых друзей."); ?></p>
                   
               <div class="ul-list-box mt25" >
                 <div class="ul-list-icon" > <i class="las la-check"></i> </div>
                 <div class="ul-list-title" >
                   <p><strong><?php echo $ULang->t("Общайтесь"); ?></strong></p>
-                  <p><?php echo $ULang->t("по объявлениям в чатах"); ?></p>
+                  <p><?php echo $ULang->t("в личных чатах без лишних преград"); ?></p>
                 </div>
                 <div class="clr" ></div>
               </div>
               <div class="ul-list-box">
                 <div class="ul-list-icon" > <i class="las la-check"></i> </div>
                 <div class="ul-list-title" >
-                  <p><strong><?php echo $ULang->t("Размещайте"); ?></strong></p>
-                  <p><?php echo $ULang->t("объявления бесплатно"); ?></p>
+                  <p><strong><?php echo $ULang->t("Знакомьтесь"); ?></strong></p>
+                  <p><?php echo $ULang->t("с интересными людьми рядом"); ?></p>
                 </div>
                 <div class="clr" ></div>                      
               </div>
               <div class="ul-list-box">
                 <div class="ul-list-icon" > <i class="las la-check"></i> </div>
                 <div class="ul-list-title" >
-                  <p><strong><?php echo $ULang->t("Покупайте со скидкой"); ?></strong></p>
-                  <p><?php echo $ULang->t("по безопасной сделке"); ?></p>
+                  <p><strong><?php echo $ULang->t("Дарите подарки"); ?></strong></p>
+                  <p><?php echo $ULang->t("и получайте взаимные симпатии"); ?></p>
                 </div>  
                 <div class="clr" ></div>                    
               </div> 
               <div class="ul-list-box">
                 <div class="ul-list-icon" > <i class="las la-check"></i> </div>
                 <div class="ul-list-title" >
-                  <p><strong><?php echo $ULang->t("Продавайте товары"); ?></strong></p>
-                  <p><?php echo $ULang->t("Просто и безопасно"); ?></p>
+                  <p><strong><?php echo $ULang->t("Создавайте анкеты"); ?></strong></p>
+                  <p><?php echo $ULang->t("и находите своего идеального партнера"); ?></p>
                 </div>
                 <div class="clr" ></div>                      
               </div>                                                                                                   
