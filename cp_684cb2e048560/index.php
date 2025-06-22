@@ -120,6 +120,10 @@ if($_GET["route"] == "users" || $_GET["route"] == "user" || $_GET["route"] == "a
   if(!$_SESSION["cp_control_board"]){
     header("Location: ?route=index");
   }
+}elseif($_GET["route"] == "sex_preferences" || $_GET["route"] == "gestures"){
+  if(!$_SESSION["cp_control_settings"]){
+    header("Location: ?route=index");
+  }
 }
 
 

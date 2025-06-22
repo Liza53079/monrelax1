@@ -6,6 +6,8 @@ $user_login = clear( $_POST["user_login"] );
 $user_name = clear( $_POST["user_name"] );
 $user_code_login = (int)$_POST["user_code_login"];
 $user_pass = clear( $_POST["user_pass"] );
+$user_preferences = clear($_POST["preferences"]);
+$verify_gesture = (int)$_POST["verify_gesture"];
 
 if($settings["registration_method"] == 1){
 
@@ -71,7 +73,16 @@ if(!$user_name){
 
 if( !$error ){
 
- $result = $Profile->auth_reg(array("method"=>$settings["registration_method"],"email"=>$user_email,"phone"=>$user_phone,"name"=>$user_name, "activation" => 1, "pass" => $user_pass));
+ $result = $Profile->auth_reg(array(
+    "method"=>$settings["registration_method"],
+    "email"=>$user_email,
+    "phone"=>$user_phone,
+    "name"=>$user_name,
+    "activation" => 1,
+    "pass" => $user_pass,
+    "preferences" => $user_preferences,
+    "verify_gesture" => $verify_gesture
+  ));
 
  echo json_encode( array( "status"=>$result["status"],"answer" => $result["answer"], "reg" => 1, "location" => _link( "user/".$result["data"]["clients_id_hash"] ) ) );
 

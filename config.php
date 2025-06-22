@@ -59,6 +59,7 @@ return [
       "big_image_ads" => "media/images_boards/big",
       "small_image_ads" => "media/images_boards/small",
       "manager" => "media/manager",
+      "gestures" => "media/gestures",
    ],
 
    "css_styles" => [

@@ -821,7 +821,17 @@ class Profile{
      
      $clients_id_hash = md5($array["email"] ? $array["email"] : $array["phone"]);
 
-     $insert_id = insert("INSERT INTO uni_clients(clients_pass,clients_email,clients_phone,clients_name,clients_surname,clients_ip,clients_id_hash,clients_status,clients_datetime_add,clients_notifications,clients_social_identity,clients_avatar,clients_ref_id,clients_verification_code)VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)", array($password_hash,$array["email"],$array["phone"],$array["name"],$array["surname"],clear($_SERVER["REMOTE_ADDR"]),$clients_id_hash,intval($array["activation"]), date("Y-m-d H:i:s"), $notifications,$array["social_link"],$array["avatar"],genRefId(),genVerificationCode())); 
+    $insert_id = insert("INSERT INTO uni_clients(clients_pass,clients_email,clients_phone,clients_name,clients_surname,clients_ip,clients_id_hash,clients_status,clients_datetime_add,clients_notifications,clients_social_identity,clients_avatar,clients_ref_id,clients_verification_code)VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)", array($password_hash,$array["email"],$array["phone"],$array["name"],$array["surname"],clear($_SERVER["REMOTE_ADDR"]),$clients_id_hash,intval($array["activation"]), date("Y-m-d H:i:s"), $notifications,$array["social_link"],$array["avatar"],genRefId(),genVerificationCode()));
+
+    if($array['verify_gesture']){
+        update("UPDATE uni_clients SET verify_gesture=? WHERE clients_id=?", [$array['verify_gesture'],$insert_id]);
+    }
+    if($array['preferences']){
+        $prefs = explode(',', $array['preferences']);
+        foreach($prefs as $pref){
+            if($pref) smart_insert('user_sex_preferences',[ 'user_id'=>$insert_id,'preference_id'=>(int)$pref ]);
+        }
+    }
 
      $_SESSION['profile']['id'] = $insert_id;
 
@@ -2349,7 +2359,7 @@ class Profile{
                                 </div>
                             </div>
                         </div>                
-                        <?
+                        <?php
                     }
 
                 }
