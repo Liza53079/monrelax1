@@ -69,7 +69,7 @@
 
                 }elseif($widgetName == "shop" && $settings["home_shop_status"]){
 
-                    $data["shops"] = getAll("select * from uni_clients_shops INNER JOIN `uni_clients` ON `uni_clients`.clients_id = `uni_clients_shops`.clients_shops_id_user where (clients_shops_time_validity > now() or clients_shops_time_validity IS NULL) and clients_shops_status=1 and clients_status IN(0,1) order by rand() limit ?", [$settings["index_out_count_shops"] ?: 16]);
+                    $data["shops"] = getAll("select * from uni_clients_shops INNER JOIN `uni_clients` ON `uni_clients`.clients_id = `uni_clients_shops`.clients_shops_id_user where (clients_shops_time_validity > now() or clients_shops_time_validity IS NULL) and clients_shops_status=1 and uni_clients.is_active=1 order by rand() limit ?", [$settings["index_out_count_shops"] ?: 16]);
 
                     if($data["shops"]){ ?>
                     <div class="mb25 title-and-link h3" > <strong><?php echo $ULang->t( "Магазины" ); ?></strong> <a href="<?php echo $Shop->linkShops(); ?>"><?php echo $ULang->t( "Все магазины" ); ?> <i class="las la-arrow-right"></i> </a> </div>
@@ -126,9 +126,9 @@
                     }
                     
                     if($settings["index_out_content_method"] == 0){
-                      $data["vip"] = $Ads->getAll( ["query"=>"ads_status='1' and clients_status IN(0,1) and ads_period_publication > now() and ads_vip='1' order by rand() limit 16", "param_search" => $param_search, "output" => 16 ] );
+                      $data["vip"] = $Ads->getAll( ["query"=>"ads_status='1' and is_active=1 and ads_period_publication > now() and ads_vip='1' order by rand() limit 16", "param_search" => $param_search, "output" => 16 ] );
                     }else{
-                      $data["vip"] = $Ads->getAll( ["query"=>"ads_status='1' and clients_status IN(0,1) and ads_period_publication > now() and ads_vip='1' $geo order by rand() limit 16", "param_search" => $param_search, "output" => 16 ] );
+                      $data["vip"] = $Ads->getAll( ["query"=>"ads_status='1' and is_active=1 and ads_period_publication > now() and ads_vip='1' $geo order by rand() limit 16", "param_search" => $param_search, "output" => 16 ] );
                     }
 
                     if($settings["main_type_products"] == 'physical'){
@@ -210,9 +210,9 @@
                     }
                     
                     if($settings["index_out_content_method"] == 0){
-                      $data["auction"] = $Ads->getAll( ["query"=>"ads_status='1' and clients_status IN(0,1) and ads_period_publication > now() and ads_auction='1' order by rand() limit 16", "output" => 16 ] );
+                      $data["auction"] = $Ads->getAll( ["query"=>"ads_status='1' and is_active=1 and ads_period_publication > now() and ads_auction='1' order by rand() limit 16", "output" => 16 ] );
                     }else{
-                      $data["auction"] = $Ads->getAll( ["query"=>"ads_status='1' and clients_status IN(0,1) and ads_period_publication > now() and ads_auction='1' $geo order by rand() limit 16", "output" => 16 ] );
+                      $data["auction"] = $Ads->getAll( ["query"=>"ads_status='1' and is_active=1 and ads_period_publication > now() and ads_auction='1' $geo order by rand() limit 16", "output" => 16 ] );
                     }
 
                     if($settings["main_type_products"] == 'physical'){

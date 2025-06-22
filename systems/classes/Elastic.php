@@ -122,7 +122,7 @@ class Elastic{
               "filter": [ 
                 { "term":  { "ads_status": "1" }},
                 '.$term.'
-                { "terms":  { "clients_status": [0,1] }},
+                { "term":  { "is_active": 1 }},
                 { "range": { "ads_period_publication": { "gte": "now" }}}
               ]
             }
@@ -142,7 +142,7 @@ class Elastic{
             "bool": {  
               "filter": [ 
                 { "term":  { "ads_status": "1" }},
-                { "terms":  { "clients_status": [0,1] }},
+                { "term":  { "is_active": 1 }},
                 { "range": { "ads_period_publication": { "gte": "now" }}}
               ]
             }

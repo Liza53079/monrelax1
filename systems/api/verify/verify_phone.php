@@ -18,7 +18,13 @@ $getVerify = findOne('uni_verify_code','user_id=? and phone=?', [$idUser,$phone]
 
 if($getVerify){
     if($getVerify['code'] == $code){
-       update('update uni_clients set clients_phone=? where clients_id=?', [$phone,$idUser]);
+       update('update uni_clients set clients_phone=?, is_phone_verified=1 where clients_id=?', [$phone,$idUser]);
+
+       $user = findOne('uni_clients','clients_id=?',[$idUser]);
+       if($user['is_email_verified']){
+           update('update uni_clients set is_active=1 where clients_id=?',[$idUser]);
+       }
+
        update('delete from uni_verify_code where id=?', [$getVerify['id']]);
        echo json_encode(['status'=>true]);
     }else{
