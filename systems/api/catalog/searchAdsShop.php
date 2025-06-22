@@ -10,7 +10,7 @@ $getShop = findOne("uni_clients_shops", "clients_shops_id=?", [$shop_id]);
 
 if(mb_strlen($query, 'UTF-8') >= 2 && $getShop){
 
-    $getAds = $Ads->getAll(["query"=>"ads_status='1' and clients_status IN(0,1) and ads_period_publication > now() and ads_id_user=".$getShop["clients_shops_id_user"]." and ".$Filters->explodeSearch($query), "sort"=>"ORDER By ads_datetime_add DESC limit 100"]);
+    $getAds = $Ads->getAll(["query"=>"ads_status='1' and (clients_status=1 or clients_verification_status=1) and ads_period_publication > now() and ads_id_user=".$getShop["clients_shops_id_user"]." and ".$Filters->explodeSearch($query), "sort"=>"ORDER By ads_datetime_add DESC limit 100"]);
 
     if($getAds["count"]){
 

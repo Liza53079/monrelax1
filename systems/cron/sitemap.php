@@ -44,7 +44,7 @@ if($settings["sitemap_seo_filters"]){
 
 if($settings["sitemap_alias_filters"] || $settings["sitemap_cities"]){
 
-   $getAds = getAll("select * from uni_ads INNER JOIN `uni_clients` ON `uni_clients`.clients_id = `uni_ads`.ads_id_user where ads_status='1' and clients_status IN(0,1) and ads_period_publication > now() group by ads_city_id");
+   $getAds = getAll("select * from uni_ads INNER JOIN `uni_clients` ON `uni_clients`.clients_id = `uni_ads`.ads_id_user where ads_status='1' and (clients_status=1 or clients_verification_status=1) and ads_period_publication > now() group by ads_city_id");
 
    if(count($getAds)){
       foreach ($getAds as $key => $ad_value) {
@@ -112,7 +112,7 @@ if($settings["sitemap_alias_filters"] || $settings["sitemap_cities"]){
 
 if($settings["sitemap_category"]){
 
-   $getAds = getAll("select * from uni_ads INNER JOIN `uni_clients` ON `uni_clients`.clients_id = `uni_ads`.ads_id_user where ads_status='1' and clients_status IN(0,1) and ads_period_publication > now() group by ads_id_cat");
+   $getAds = getAll("select * from uni_ads INNER JOIN `uni_clients` ON `uni_clients`.clients_id = `uni_ads`.ads_id_user where ads_status='1' and (clients_status=1 or clients_verification_status=1) and ads_period_publication > now() group by ads_id_cat");
 
    if(count($getAds)){
       foreach ($getAds as $key => $ad_value) {
@@ -186,7 +186,7 @@ if($settings["sitemap_blog_category"]){
 
 if($settings["sitemap_shops"]){
 
-   $getShops = getAll( "select * from uni_clients_shops INNER JOIN `uni_clients` ON `uni_clients`.clients_id = `uni_clients_shops`.clients_shops_id_user where clients_shops_time_validity > now() and clients_status IN(0,1) and clients_shops_status=?", [1]);
+   $getShops = getAll( "select * from uni_clients_shops INNER JOIN `uni_clients` ON `uni_clients`.clients_id = `uni_clients_shops`.clients_shops_id_user where clients_shops_time_validity > now() and (clients_status=1 or clients_verification_status=1) and clients_shops_status=?", [1]);
 
    if($getShops){
       foreach ($getShops as $value) {

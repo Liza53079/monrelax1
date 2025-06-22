@@ -122,7 +122,14 @@ class Elastic{
               "filter": [ 
                 { "term":  { "ads_status": "1" }},
                 '.$term.'
-                { "terms":  { "clients_status": [0,1] }},
+                { "bool": {
+                    "should": [
+                        { "term": { "clients_status": "1" }},
+                        { "term": { "clients_verification_status": "1" }}
+                    ],
+                    "minimum_should_match": 1,
+                    "must_not": [ { "term": { "clients_status": "0" } } ]
+                  }},
                 { "range": { "ads_period_publication": { "gte": "now" }}}
               ]
             }
@@ -142,7 +149,14 @@ class Elastic{
             "bool": {  
               "filter": [ 
                 { "term":  { "ads_status": "1" }},
-                { "terms":  { "clients_status": [0,1] }},
+                { "bool": {
+                    "should": [
+                        { "term": { "clients_status": "1" }},
+                        { "term": { "clients_verification_status": "1" }}
+                    ],
+                    "minimum_should_match": 1,
+                    "must_not": [ { "term": { "clients_status": "0" } } ]
+                  }},
                 { "range": { "ads_period_publication": { "gte": "now" }}}
               ]
             }

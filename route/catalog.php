@@ -138,9 +138,9 @@ $data["city_metro"] = getAll("select * from uni_metro where city_id=? and parent
 
 if($data["category"]){
    $ids_cat = idsBuildJoin($CategoryBoard->idsBuild($data["category"]["category_board_id"], $getCategoryBoard), $data["category"]["category_board_id"]);
-   $data["vip"] = $Ads->getAll( ["query"=>"ads_status='1' and clients_status IN(0,1) and ads_period_publication > now() and ads_vip='1' and ads_id_cat IN(".$ids_cat.") $geo order by rand() limit 16", "param_search" => $param_search, "output" => 16 ] );
+   $data["vip"] = $Ads->getAll( ["query"=>"ads_status='1' and (clients_status=1 or clients_verification_status=1) and ads_period_publication > now() and ads_vip='1' and ads_id_cat IN(".$ids_cat.") $geo order by rand() limit 16", "param_search" => $param_search, "output" => 16 ] );
 }else{
-   $data["vip"] = $Ads->getAll( ["query"=>"ads_status='1' and clients_status IN(0,1) and ads_period_publication > now() and ads_vip='1' $geo order by rand() limit 16", "param_search" => $param_search, "output" => 16 ] );
+   $data["vip"] = $Ads->getAll( ["query"=>"ads_status='1' and (clients_status=1 or clients_verification_status=1) and ads_period_publication > now() and ads_vip='1' $geo order by rand() limit 16", "param_search" => $param_search, "output" => 16 ] );
 }
 
 if($_SESSION["geo"]["alias"]){

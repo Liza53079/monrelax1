@@ -34,7 +34,7 @@ class Filters{
       $Main = new Main();
       $Elastic = new Elastic();
 
-      $binding_query = "ads_status='1' and clients_status IN(0,1) and ads_period_publication > now()";
+      $binding_query = "ads_status='1' and (clients_status=1 or clients_verification_status=1) and ads_period_publication > now()";
 
       $param_search = $Elastic->paramAdquery();
 

@@ -76,7 +76,7 @@ if($sorting == 'default'){
     
 }
 
-$query[] = "clients_status IN(0,1) and ads_status='1' and ads_period_publication > now()";
+$query[] = "(clients_status=1 or clients_verification_status=1) and ads_status='1' and ads_period_publication > now()";
 
 if(!$only_ids){
 

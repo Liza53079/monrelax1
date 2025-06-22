@@ -9,7 +9,7 @@ $param_search["sort"]["ads_sorting"] = [ "order" => "desc" ];
 
 if( $query ){
 
-  $results = $Ads->getAll( array( "query"=>"ads_status='1' and clients_status IN(0,1) and ads_period_publication > now() and ads_id_user='{$id_user}' and " . $Filters->explodeSearch( $query ), "navigation"=>true, "page"=>$page, "param_search" => $param_search ) );
+  $results = $Ads->getAll( array( "query"=>"ads_status='1' and (clients_status=1 or clients_verification_status=1) and ads_period_publication > now() and ads_id_user='{$id_user}' and " . $Filters->explodeSearch( $query ), "navigation"=>true, "page"=>$page, "param_search" => $param_search ) );
   
 }else{
 

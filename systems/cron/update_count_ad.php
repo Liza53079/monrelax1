@@ -12,7 +12,7 @@ if($settings['display_count_ads_categories']){
 
       foreach ($getCategories as $value) {
 
-         $getAds = getAll("select * from uni_ads INNER JOIN `uni_clients` ON `uni_clients`.clients_id = `uni_ads`.ads_id_user where ads_status='1' and clients_status IN(0,1) and ads_period_publication > now() and ads_id_cat='".$value["category_board_id"]."'");
+         $getAds = getAll("select * from uni_ads INNER JOIN `uni_clients` ON `uni_clients`.clients_id = `uni_ads`.ads_id_user where ads_status='1' and (clients_status=1 or clients_verification_status=1) and ads_period_publication > now() and ads_id_cat='".$value["category_board_id"]."'");
 
          if($getAds){
             foreach ($getAds as $ad_value) {

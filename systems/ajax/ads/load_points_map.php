@@ -18,7 +18,7 @@ if($_POST['search']){
 	    $geoQuery = $geoQuery ? ' and ' . $geoQuery : '';
 	}
 
-    $result = $Ads->getAll(array("query"=>"ads_status='1' and clients_status IN(0,1) and ads_period_publication > now() $geoQuery and " . $Filters->explodeSearch($query), "navigation"=>true, "page"=>$_POST['page'], "output"=>2000));
+    $result = $Ads->getAll(array("query"=>"ads_status='1' and (clients_status=1 or clients_verification_status=1) and ads_period_publication > now() $geoQuery and " . $Filters->explodeSearch($query), "navigation"=>true, "page"=>$_POST['page'], "output"=>2000));
 
 }else{
 

@@ -46,7 +46,7 @@ if(count($getPages)){
 	}
 }
 
-$getCountAds = $Ads->getCount("ads_status='1' and clients_status IN(0,1) and ads_period_publication > now() and ads_id_user='".$getShop["clients_shops_id_user"]."'");
+$getCountAds = $Ads->getCount("ads_status='1' and (clients_status=1 or clients_verification_status=1) and ads_period_publication > now() and ads_id_user='".$getShop["clients_shops_id_user"]."'");
 $getSubscribers = (int)getOne("select count(*) as total from uni_clients_subscriptions where clients_subscriptions_id_user_to=?", [$getShop["clients_shops_id_user"]])["total"];
 $getInSubscribe = findOne('uni_clients_subscriptions', 'clients_subscriptions_id_user_from=? and clients_subscriptions_id_user_to=?', [$idUser,$getShop["clients_shops_id_user"]]);
 

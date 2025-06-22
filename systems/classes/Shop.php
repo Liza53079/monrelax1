@@ -145,9 +145,9 @@ class Shop{
         $param_search["sort"]["ads_id"] = [ "order" => "desc" ];
 
         if( $param["limit"] ){
-            return $Ads->getAll( ["query"=>"ads_status='1' and clients_status IN(0,1) and ads_period_publication > now() and ads_id_user='{$param["id_user"]}'", "sort" => "order by ads_sorting desc, ads_id desc limit {$param["limit"]}", "param_search" => $param_search, "output" => $param["limit"] ] );
+            return $Ads->getAll( ["query"=>"ads_status='1' and (clients_status=1 or clients_verification_status=1) and ads_period_publication > now() and ads_id_user='{$param["id_user"]}'", "sort" => "order by ads_sorting desc, ads_id desc limit {$param["limit"]}", "param_search" => $param_search, "output" => $param["limit"] ] );
         }else{
-            return $Ads->getAll( ["query"=>"ads_status='1' and clients_status IN(0,1) and ads_period_publication > now() and ads_id_user='{$param["id_user"]}'", "sort" => "order by ads_sorting desc, ads_id desc", "navigation" => $param["navigation"], "param_search" => $param_search ] );
+            return $Ads->getAll( ["query"=>"ads_status='1' and (clients_status=1 or clients_verification_status=1) and ads_period_publication > now() and ads_id_user='{$param["id_user"]}'", "sort" => "order by ads_sorting desc, ads_id desc", "navigation" => $param["navigation"], "param_search" => $param_search ] );
         }
 
 

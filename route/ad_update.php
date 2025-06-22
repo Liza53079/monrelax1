@@ -32,7 +32,7 @@ if( $_SESSION['cp_control_board'] ){
 
 }else{
 
-   $data = $Ads->get("ads_id='$id_ad' and ads_id_user='".intval($_SESSION["profile"]["id"])."' and clients_status IN(0,1) and ads_status IN(0,7,2,1)");
+   $data = $Ads->get("ads_id='$id_ad' and ads_id_user='".intval($_SESSION["profile"]["id"])."' and (clients_status=1 or clients_verification_status=1) and ads_status IN(0,7,2,1)");
 
 }
 

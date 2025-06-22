@@ -1709,7 +1709,7 @@ function apiViewAds($id = 0, $id_user = 0, $ip = ""){
                 $sliders = [];
                 $ads_images = [];
 
-                $getCountAds = $Ads->getCount("ads_status='1' and clients_status IN(0,1) and ads_period_publication > now() and ads_id_user='".$value["clients_shops_id_user"]."'");
+                $getCountAds = $Ads->getCount("ads_status='1' and (clients_status=1 or clients_verification_status=1) and ads_period_publication > now() and ads_id_user='".$value["clients_shops_id_user"]."'");
                 $getUser = findOne('uni_clients', 'clients_id=?', [$value['clients_shops_id_user']]);
                 $getSliders = getAll("select * from uni_clients_shops_slider where clients_shops_slider_id_shop=?", [$value["clients_shops_id"]]);
 

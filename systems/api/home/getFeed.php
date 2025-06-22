@@ -23,7 +23,7 @@ if(count($getFeeds)){
 
     	if($value['feed_stories_action'] == 'new_ads'){
 
-    		$getAds = $Ads->getAll(["query"=>"ads_id IN(".implode(',',$data['ids']).") and ads_status='1' and clients_status IN(0,1) and ads_period_publication > now()"]);
+    		$getAds = $Ads->getAll(["query"=>"ads_id IN(".implode(',',$data['ids']).") and ads_status='1' and (clients_status=1 or clients_verification_status=1) and ads_period_publication > now()"]);
 
     		if($getAds['count']){
 
@@ -135,7 +135,7 @@ if(count($getFeeds)){
 
     	}elseif($value['feed_stories_action'] == 'services_ad'){
 
-    		$getAd = $Ads->get("ads_id=? and ads_status=? and clients_status IN(0,1) and ads_period_publication > now()", [$data['id'],1]);
+    		$getAd = $Ads->get("ads_id=? and ads_status=? and (clients_status=1 or clients_verification_status=1) and ads_period_publication > now()", [$data['id'],1]);
 
     		if($getAd){
 
