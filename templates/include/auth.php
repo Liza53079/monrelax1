@@ -132,10 +132,29 @@
       <input type="text"  class="form-control input-style2-custom" placeholder="<?php echo $ULang->t("Ваше имя"); ?>" name="user_name">
       <div class="msg-error mb10" data-name="user_name" ></div>
 
+      <?php $prefs = getAll("SELECT * FROM sex_preferences"); ?>
+      <?php if($prefs){ ?>
+      <select name="user_preferences[]" class="selectpicker" multiple>
+        <?php foreach($prefs as $p){ ?>
+           <option value="<?php echo $p['id']; ?>" ><?php echo $p['name']; ?></option>
+        <?php } ?>
+      </select>
+      <div class="msg-error mb10" data-name="user_preferences" ></div>
+      <?php } ?>
+
+      <?php $gesture = getOne("SELECT * FROM uni_gestures ORDER BY RAND() LIMIT 1"); ?>
+      <?php if($gesture){ ?>
+      <div class="verify-gesture text-center mt10">
+         <p><?php echo $gesture['description']; ?></p>
+         <img src="<?php echo $config['urlPath'].'/'.$config['media']['gestures'].'/'.$gesture['image']; ?>" height="80" >
+         <input type="hidden" name="verify_gesture" value="<?php echo $gesture['id']; ?>">
+      </div>
+      <?php } ?>
+
       <input type="password"  class="form-control input-style2-custom" placeholder="<?php echo $ULang->t("Пароль"); ?>" maxlength="25" name="user_pass">
       <div class="msg-error mb10" data-name="user_pass" ></div>
 
-      <button class="button-style-custom schema-color-button color-green action-reg-finish mt20" ><?php echo $ULang->t("Завершить регистрацию"); ?></button>           
+      <button class="button-style-custom schema-color-button color-green action-reg-finish mt20" ><?php echo $ULang->t("Завершить регистрацию"); ?></button>
     </div>
 
     <?php if($settings["authorization_social"]){ ?>
