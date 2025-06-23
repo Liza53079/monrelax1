@@ -123,7 +123,7 @@ class Profile{
 
          $_SESSION['profile']['id'] = $get->clients_id;
 
-         if($get->clients_status == 2 || $get->clients_status == 3){
+         if($get->clients_status == 2 || $get->clients_status == 3 || $get->clients_status == 4){
            update('update uni_clients set clients_cookie_token=? where clients_id=?',['',$get->clients_id]);
            unset($_SESSION['profile']); 
            setcookie("tokenAuth", "", time() - 2592000);
@@ -748,7 +748,7 @@ class Profile{
 
        if($getUser){
 
-           if($getUser->clients_status == 2 || $getUser->clients_status == 3){
+           if($getUser->clients_status == 2 || $getUser->clients_status == 3 || $getUser->clients_status == 4){
                  
                return array( "status" => false, "status_user" => $getUser->clients_status );
 
@@ -772,7 +772,7 @@ class Profile{
 
        if($getUser){
              
-             if($getUser->clients_status == 2 || $getUser->clients_status == 3){
+             if($getUser->clients_status == 2 || $getUser->clients_status == 3 || $getUser->clients_status == 4){
                    
                  return array( "status" => false, "status_user" => $getUser->clients_status );
 

@@ -55,7 +55,7 @@ if (!$error) {
     $notifications = '{"messages":"1","answer_comments":"1","services":"1"}';
 
     $insert = insert("INSERT INTO uni_clients(clients_name,clients_surname,clients_pass,clients_email,clients_phone,clients_avatar,clients_status,clients_city_id,clients_datetime_add,clients_datetime_view,clients_id_hash,clients_notifications,clients_ref_id,clients_verification_code)
-                    VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)", array($_POST['user_name'],$_POST['user_surname'],$password,$_POST['user_email'],$phone, $image["name"],1,intval($_POST["city_id"]), date("Y-m-d H:i:s"), date("Y-m-d H:i:s"),$clients_id_hash,$notifications,genRefId(),genVerificationCode()));    
+                    VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)", array($_POST['user_name'],$_POST['user_surname'],$password,$_POST['user_email'],$phone, $image["name"],4,intval($_POST["city_id"]), date("Y-m-d H:i:s"), date("Y-m-d H:i:s"),$clients_id_hash,$notifications,genRefId(),genVerificationCode()));    
     
     echo json_encode(array("status" => true, "id" => $insert ));
 

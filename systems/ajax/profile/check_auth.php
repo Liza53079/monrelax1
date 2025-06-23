@@ -79,7 +79,7 @@ if(!$error){
  
  if($getUser){
 
-       if($getUser->clients_status == 2 || $getUser->clients_status == 3){
+       if($getUser->clients_status == 2 || $getUser->clients_status == 3 || $getUser->clients_status == 4){
              
          $_SESSION["auth_captcha"]["count"]++;
          echo json_encode( array( "status" => false, "status_user" => $getUser->clients_status, "captcha"=>$_SESSION["auth_captcha"]["status"] ) );
