@@ -7,7 +7,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&family=Roboto:wght@100;300&display=swap" rel="stylesheet">
 
+<?php if($settings["pwa_status"]){ ?>
 <link rel="manifest" href="<?php echo $config['urlPath'] ?>/manifest.json">
+<?php } ?>
 
 <?php echo $settings["header_meta"]; ?>
 

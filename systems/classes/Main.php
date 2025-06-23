@@ -1001,15 +1001,28 @@ class Main{
         if( $settings["pwa_status"] ){
 
           echo "
-            
+
             <script type='text/javascript'>
-            if (navigator.serviceWorker.controller) {
-                
-            } else {
-                navigator.serviceWorker.register('".$config["urlPath"]."/sw.js?v=".time()."', {
-                    scope: '".$config["urlPrefix"]."'
-                }).then(function(reg) {
-                    
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register('".$config["urlPath"]."/sw.js?v=".time()."', { scope: '".$config["urlPrefix"]."' })
+                .then(function(reg) {
+                    if ('PushManager' in window) {
+                        Notification.requestPermission().then(function(permission){
+                            if (permission === 'granted') {
+                                reg.pushManager.subscribe({userVisibleOnly: true}).catch(function(e){ console.log(e); });
+                            }
+                        });
+                    }
+                });
+
+                navigator.serviceWorker.addEventListener('message', function(e){
+                    if (e.data && e.data.type === 'blockScreenshots') {
+                        if (/Android/i.test(navigator.userAgent) && /wv/i.test(navigator.userAgent)) {
+                            var style = document.createElement('style');
+                            style.innerHTML = '*{user-select:none;-webkit-user-select:none;}';
+                            document.head.appendChild(style);
+                        }
+                    }
                 });
             }
             </script>
