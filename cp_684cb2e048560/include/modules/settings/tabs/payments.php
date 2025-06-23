@@ -47,12 +47,20 @@
 
             </div>                              
             <?php
-         }
-       }
-    ?>  
+        }
+      }
+   ?>
 
 </div>
-</div>         
+</div>
+
+<div class="form-group row d-flex align-items-center mb-5">
+  <label class="col-lg-3 form-control-label">Пакеты монет</label>
+  <div class="col-lg-9">
+      <textarea class="form-control" name="coin_packages" rows="5"><?php echo htmlspecialchars($settings["coin_packages"] ?? ""); ?></textarea>
+      <small>Формат строки: код_страны|монет|цена|бонус чатов</small>
+  </div>
+</div>
 
 <div class="param-payment" ></div>
 

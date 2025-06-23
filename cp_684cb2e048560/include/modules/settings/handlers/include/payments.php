@@ -12,4 +12,17 @@ if(isset($_POST["payment_param"])){
 
 }
 
+if(isset($_POST['coin_packages'])){
+   $packages = [];
+   foreach (explode("\n", $_POST['coin_packages']) as $line){
+       $line = trim($line);
+       if(!$line) continue;
+       list($country,$coins,$price,$bonus) = array_map('trim', explode('|',$line) + [null,null,null,null]);
+       if($country !== null){
+           $packages[$country][] = ['coins'=>(int)$coins,'price'=>(float)$price,'bonus'=>(int)$bonus];
+       }
+   }
+   update("UPDATE uni_settings SET value=? WHERE name=?", array(json_encode($packages),'coin_packages'));
+}
+
 ?>
