@@ -63,7 +63,7 @@ if(!count($errors)){
 
      if($getUser){
 
-           if($getUser->clients_status == 2 || $getUser->clients_status == 3){
+           if($getUser->clients_status == 2 || $getUser->clients_status == 3 || $getUser->clients_status == 4){
                  
              echo json_encode(["status"=>false, "errors" => apiLangContent("Ваш аккаунт заблокирован!")]);
 

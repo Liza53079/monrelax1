@@ -27,6 +27,10 @@ if($_GET['sort'] == 1){
     $query = "clients_verification_status=0 and clients_status!=3"; 
     $sort_name = "Не верифицированные";                         
 }
+elseif ($_GET['sort'] == 7){
+    $query = 'clients_status=4';
+    $sort_name = 'Ожидают';
+}
            
 $url[] = 'sort='.$_GET['sort'];
 
@@ -92,6 +96,7 @@ $LINK = "?".implode("&",$url);
       <a class="dropdown-item" href="?route=clients&sort=3">Заблокированные</a>
       <a class="dropdown-item" href="?route=clients&sort=5">Верифицированные</a>
       <a class="dropdown-item" href="?route=clients&sort=6">Не верифицированные</a>
+      <a class="dropdown-item" href="?route=clients&sort=7">Ожидают</a>
     </div>
    </div>
  </div>
@@ -205,6 +210,15 @@ $LINK = "?".implode("&",$url);
 
                                         <?php
 
+                                     }elseif($value["clients_status"] == 4){
+                                        ?>
+                                        <button class="btn btn-info dropdown-toggle btn-sm" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                          Ожидает
+                                        </button>
+                                        <div class="dropdown-menu" >
+                                          <a class="dropdown-item change-status-user" data-id="<?php echo $value["clients_id"]; ?>" data-status="1" href="#">Активировать</a>
+                                        </div>
+                                        <?php
                                      }elseif($value["clients_status"] == 3){
 
                                         ?>

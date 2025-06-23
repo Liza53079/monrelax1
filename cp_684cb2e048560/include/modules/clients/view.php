@@ -160,6 +160,15 @@ $data["requisites_company"] = $getUser['clients_requisites_company'] ? json_deco
 
                                   <?php
 
+                               }elseif($getUser["clients_status"] == 4){
+                                  ?>
+                                  <button class="btn btn-info dropdown-toggle btn-sm" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Ожидает
+                                  </button>
+                                  <div class="dropdown-menu" >
+                                    <a class="dropdown-item change-status-user" data-id="<?php echo $getUser["clients_id"]; ?>" data-status="1" href="#">Активировать</a>
+                                  </div>
+                                  <?php
                                }elseif($getUser["clients_status"] == 3){
 
                                   ?>
