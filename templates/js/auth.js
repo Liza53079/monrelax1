@@ -183,7 +183,7 @@ $(document).ready(function () {
       
       showLoadProcess(this_);
 
-      $.ajax({type: "POST",url: url_path + "systems/ajax/controller.php",data: "user_login=" + $(".auth-block-tab-reg input[name=user_login]").val() + "&user_code_login=" + $(".auth-block-tab-reg input[name=user_code_login]").val() + "&user_pass=" + $(".auth-block-tab-reg input[name=user_pass]").val() + "&user_name=" + $(".auth-block-tab-reg input[name=user_name]").val() + "&action=profile/reg_finish",dataType: "json",cache: false,success: function (data) { 
+      $.ajax({type: "POST",url: url_path + "systems/ajax/controller.php",data: "user_login=" + $(".auth-block-tab-reg input[name=user_login]").val() + "&user_code_login=" + $(".auth-block-tab-reg input[name=user_code_login]").val() + "&user_pass=" + $(".auth-block-tab-reg input[name=user_pass]").val() + "&user_name=" + $(".auth-block-tab-reg input[name=user_name]").val() + "&" + $(".auth-block-tab-reg input[name=preferences[]]:checked").serialize() + "&action=profile/reg_finish",dataType: "json",cache: false,success: function (data) {
 
          if( data["status"] == true ){
             

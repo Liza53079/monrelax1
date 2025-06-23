@@ -72,6 +72,14 @@ if(!$user_name){
 if( !$error ){
 
  $result = $Profile->auth_reg(array("method"=>$settings["registration_method"],"email"=>$user_email,"phone"=>$user_phone,"name"=>$user_name, "activation" => 1, "pass" => $user_pass));
+ $preferences = isset($_POST["preferences"]) ? $_POST["preferences"] : array();
+ if($result["status"] && $preferences){
+   foreach($preferences as $pref){
+     insert("INSERT INTO user_sex_preferences(user_id,preference_id) VALUES(?,?)", [ $result["data"]["clients_id"], intval($pref) ]);
+   }
+ }
+
+
 
  echo json_encode( array( "status"=>$result["status"],"answer" => $result["answer"], "reg" => 1, "location" => _link( "user/".$result["data"]["clients_id_hash"] ) ) );
 
