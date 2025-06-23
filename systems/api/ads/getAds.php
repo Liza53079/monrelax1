@@ -63,7 +63,7 @@ if($filterIdUser){
       $sorting = "order by ads_sorting desc";
     }
 
-		$query[] = "clients_status IN(0,1) and ads_status='1' and ads_period_publication > now() and ads_id_user='".$filterIdUser."'";
+		$query[] = "(clients_status=1 or clients_verification_status=1) and ads_status='1' and ads_period_publication > now() and ads_id_user='".$filterIdUser."'";
 
 		$getAds = $Ads->getAll(["navigation"=>true,"page"=>$page,"output"=>$output,"query"=>implode(' and ', $query), "sort"=>$sorting]);
 
@@ -139,7 +139,7 @@ if($filterIdUser){
 		$query[] = "ads_auction='1'";
 	}
 
-	$query[] = "clients_status IN(0,1) and ads_status='1' and ads_period_publication > now()";
+	$query[] = "(clients_status=1 or clients_verification_status=1) and ads_status='1' and ads_period_publication > now()";
 
 	$getAds = $Ads->getAll(["navigation"=>true,"page"=>$page,"output"=>$output,"query"=>implode(' and ', $query), "sort"=>$sorting]);
 

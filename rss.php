@@ -119,7 +119,7 @@ if( $content == "blog" ){
 
 }elseif( $content == "ads" ){
 
-	$query = "ads_status='1' and clients_status IN(0,1) and ads_period_publication > now()";
+	$query = "ads_status='1' and (clients_status=1 or clients_verification_status=1) and ads_period_publication > now()";
 	
 	if( $sort == "news" ){
         $sort = 'ORDER By ads_id DESC';

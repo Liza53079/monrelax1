@@ -117,7 +117,7 @@ if(mb_strlen($query, 'UTF-8') >= 2){
 
 	// Ads
 
-   $getAds = $Ads->getAll(["query"=>"ads_status='1' and clients_status IN(0,1) and ads_period_publication > now() and ".$Filters->explodeSearch(clearSearchBack($_GET["query"])).$queryGeo, "sort"=>"ORDER By ads_datetime_add DESC limit 5"]);
+   $getAds = $Ads->getAll(["query"=>"ads_status='1' and (clients_status=1 or clients_verification_status=1) and ads_period_publication > now() and ".$Filters->explodeSearch(clearSearchBack($_GET["query"])).$queryGeo, "sort"=>"ORDER By ads_datetime_add DESC limit 5"]);
 
    if($getAds["count"]){
 

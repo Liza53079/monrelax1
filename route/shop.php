@@ -93,7 +93,7 @@ if( $data["current_page"] ){
 
 $data["shop_count_subscriptions"] = (int)getOne("select count(*) as total from uni_clients_subscriptions where clients_subscriptions_id_user_to=?", [ intval($data["shop"]["clients_shops_id_user"]) ])["total"];
 
-$data["shop_count_ads"] = $Ads->getCount( "ads_status='1' and clients_status IN(0,1) and ads_period_publication > now() and ads_id_user='{$data["shop"]["clients_shops_id_user"]}'" );
+$data["shop_count_ads"] = $Ads->getCount( "ads_status='1' and (clients_status=1 or clients_verification_status=1) and ads_period_publication > now() and ads_id_user='{$data["shop"]["clients_shops_id_user"]}'" );
 $data["shop_sliders"] = getAll("select * from uni_clients_shops_slider where clients_shops_slider_id_shop=?", [ $data["shop"]["clients_shops_id"] ]);
 
 $data["shop_subscribers"] = getAll("select * from uni_clients_subscriptions where clients_subscriptions_id_shop=?", [ $data["shop"]["clients_shops_id"] ]);

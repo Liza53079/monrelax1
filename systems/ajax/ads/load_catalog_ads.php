@@ -28,7 +28,7 @@ if( $query ){
      }
   }
 
-  $results = $Ads->getAll( array( "query"=>"ads_status='1' and clients_status IN(0,1) and ads_period_publication > now() $geoQuery and " . $Filters->explodeSearch($query) . " " .$sorting, "navigation"=>true, "output"=>$output, "page"=>$page, "param_search" => $param_search ) );
+  $results = $Ads->getAll( array( "query"=>"ads_status='1' and (clients_status=1 or clients_verification_status=1) and ads_period_publication > now() $geoQuery and " . $Filters->explodeSearch($query) . " " .$sorting, "navigation"=>true, "output"=>$output, "page"=>$page, "param_search" => $param_search ) );
   
 }else{
 

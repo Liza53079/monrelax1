@@ -32,7 +32,7 @@ if($getViewAds){
 		$viewAds[] = $value["ads_id"];
 	}
 
-	$getAds = $Ads->getAll(["query"=>"ads_status='1' and clients_status IN(0,1) and ads_period_publication > now() and ads_id IN(".implode(",", $viewAds).")"]);
+	$getAds = $Ads->getAll(["query"=>"ads_status='1' and (clients_status=1 or clients_verification_status=1) and ads_period_publication > now() and ads_id IN(".implode(",", $viewAds).")"]);
 
     $viewed = apiArrayDataAds($getAds,$idUser); 
 

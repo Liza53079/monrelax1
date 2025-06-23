@@ -7,8 +7,8 @@ if($id_c){
    $query = " and ( clients_shops_id_theme_category='{$id_c}' or clients_shops_id_theme_category='0' )";
 }
 
-$count = (int)getOne("select count(*) as total from uni_clients_shops INNER JOIN `uni_clients` ON `uni_clients`.clients_id = `uni_clients_shops`.clients_shops_id_user where (clients_shops_time_validity > now() or clients_shops_time_validity IS NULL) and clients_shops_status=1 and clients_status IN(0,1) {$query}")["total"];
-$results = getAll( "select * from uni_clients_shops INNER JOIN `uni_clients` ON `uni_clients`.clients_id = `uni_clients_shops`.clients_shops_id_user where (clients_shops_time_validity > now() or clients_shops_time_validity IS NULL) and clients_shops_status=1 and clients_status IN(0,1) {$query} order by clients_shops_id desc" . navigation_offset( array( "count"=>$count, "output"=>$settings["shops_out_content"], "page"=>$page ) ) );
+$count = (int)getOne("select count(*) as total from uni_clients_shops INNER JOIN `uni_clients` ON `uni_clients`.clients_id = `uni_clients_shops`.clients_shops_id_user where (clients_shops_time_validity > now() or clients_shops_time_validity IS NULL) and clients_shops_status=1 and (clients_status=1 or clients_verification_status=1) {$query}")["total"];
+$results = getAll( "select * from uni_clients_shops INNER JOIN `uni_clients` ON `uni_clients`.clients_id = `uni_clients_shops`.clients_shops_id_user where (clients_shops_time_validity > now() or clients_shops_time_validity IS NULL) and clients_shops_status=1 and (clients_status=1 or clients_verification_status=1) {$query} order by clients_shops_id desc" . navigation_offset( array( "count"=>$count, "output"=>$settings["shops_out_content"], "page"=>$page ) ) );
 
 if($results){
 

@@ -14,7 +14,7 @@ if(count($getOrderAd)){
 }
 
 if($data["ids"]){
-   $getAds = $Ads->getAll( array("query"=>"ads_status='1' and clients_status IN(0,1) and ads_period_publication > now() and ads_id IN(".implode(",",$data["ids"]).")", "sort"=>"order by ads_count_display desc", "navigation"=>false) );
+   $getAds = $Ads->getAll( array("query"=>"ads_status='1' and (clients_status=1 or clients_verification_status=1) and ads_period_publication > now() and ads_id IN(".implode(",",$data["ids"]).")", "sort"=>"order by ads_count_display desc", "navigation"=>false) );
    if($getAds["all"]){
       foreach ($getAds["all"] as $key => $value) {
 

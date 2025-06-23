@@ -71,7 +71,7 @@
                       if( $getCategoryBoard["category_board_id_parent"][0] ){
                           foreach ($getCategoryBoard["category_board_id_parent"][0] as $value) {
 
-                              $countShop = (int)getOne( 'select count(*) as total from uni_clients_shops INNER JOIN `uni_clients` ON `uni_clients`.clients_id = `uni_clients_shops`.clients_shops_id_user where (clients_shops_time_validity > now() or clients_shops_time_validity IS NULL) and clients_shops_status=1 and clients_status IN(0,1) and (clients_shops_id_theme_category=? or clients_shops_id_theme_category=?)', [ $value["category_board_id"], 0 ] )['total'];
+                              $countShop = (int)getOne( 'select count(*) as total from uni_clients_shops INNER JOIN `uni_clients` ON `uni_clients`.clients_id = `uni_clients_shops`.clients_shops_id_user where (clients_shops_time_validity > now() or clients_shops_time_validity IS NULL) and clients_shops_status=1 and (clients_status=1 or clients_verification_status=1) and (clients_shops_id_theme_category=? or clients_shops_id_theme_category=?)', [ $value["category_board_id"], 0 ] )['total'];
                               ?>
                               <li>
                                 <a <?php if( $value["category_board_id"] == $data["current_category"]["category_board_id"] ){ echo 'class="active"'; } ?> href="<?php echo $Shop->linkShopsCategory($value["category_board_chain"]); ?>"><?php echo $ULang->t( $value["category_board_name"], [ "table" => "uni_category_board", "field" => "category_board_name" ] ); ?><span class="shop-category-list-count" ><?php echo $countShop; ?></span></a>
@@ -116,7 +116,7 @@
                       if( $getCategoryBoard["category_board_id_parent"][0] ){
                           foreach ($getCategoryBoard["category_board_id_parent"][0] as $value) {
 
-                              $countShop = (int)getOne( 'select count(*) as total from uni_clients_shops INNER JOIN `uni_clients` ON `uni_clients`.clients_id = `uni_clients_shops`.clients_shops_id_user where (clients_shops_time_validity > now() or clients_shops_time_validity IS NULL) and clients_shops_status=1 and clients_status IN(0,1) and (clients_shops_id_theme_category=? or clients_shops_id_theme_category=?)', [ $value["category_board_id"], 0 ] )['total'];
+                              $countShop = (int)getOne( 'select count(*) as total from uni_clients_shops INNER JOIN `uni_clients` ON `uni_clients`.clients_id = `uni_clients_shops`.clients_shops_id_user where (clients_shops_time_validity > now() or clients_shops_time_validity IS NULL) and clients_shops_status=1 and (clients_status=1 or clients_verification_status=1) and (clients_shops_id_theme_category=? or clients_shops_id_theme_category=?)', [ $value["category_board_id"], 0 ] )['total'];
                               ?>
                               <li>
                                 <a <?php if($value["category_board_id"] == $data["current_category"]["category_board_id"]){ echo 'class="active"'; } ?> href="<?php echo $Shop->linkShopsCategory($value["category_board_chain"]); ?>"><?php echo $ULang->t($value["category_board_name"], [ "table" => "uni_category_board", "field" => "category_board_name" ]); ?><span class="shop-category-list-count" ><?php echo $countShop; ?></span></a>

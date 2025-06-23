@@ -10,7 +10,7 @@ if($user_id){
 
   if(mb_strlen($query, 'UTF-8') >= 2){
 
-      $getAds = $Ads->getAll(["query"=>"ads_status!='8' and clients_status IN(0,1) and ads_id_user=".$user_id." and ".$Filters->explodeSearch($query), "sort"=>"ORDER By ads_datetime_add DESC limit 100"]);
+      $getAds = $Ads->getAll(["query"=>"ads_status!='8' and (clients_status=1 or clients_verification_status=1) and ads_id_user=".$user_id." and ".$Filters->explodeSearch($query), "sort"=>"ORDER By ads_datetime_add DESC limit 100"]);
 
       if($getAds["count"]){
 
@@ -25,7 +25,7 @@ if($user_id){
 
   }else{
 
-      $getAds = $Ads->getAll(["query"=>"ads_status!='8' and clients_status IN(0,1) and ads_id_user=".$user_id, "sort"=>"ORDER By ads_datetime_add DESC limit 5"]);
+      $getAds = $Ads->getAll(["query"=>"ads_status!='8' and (clients_status=1 or clients_verification_status=1) and ads_id_user=".$user_id, "sort"=>"ORDER By ads_datetime_add DESC limit 5"]);
 
       if($getAds["count"]){
 

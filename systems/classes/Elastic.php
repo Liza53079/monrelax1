@@ -122,8 +122,20 @@ class Elastic{
               "filter": [ 
                 { "term":  { "ads_status": "1" }},
                 '.$term.'
+
+                { "bool": {
+                    "should": [
+                        { "term": { "clients_status": "1" }},
+                        { "term": { "clients_verification_status": "1" }}
+                    ],
+                    "minimum_should_match": 1,
+                    "must_not": [ { "term": { "clients_status": "0" } } ]
+                  }},
+                { "range": { "ads_period_publication": { "gte": "now" }}}
+=======
                 { "terms":  { "clients_status": [1] }},
                 { "range": { "ads_period_publication": { "gte": "now" }}}
+
               ]
             }
           }
@@ -141,6 +153,22 @@ class Elastic{
           "query": {
             "bool": {  
               "filter": [ 
+
+                { "term":  { "ads_status": "1" }},
+                { "bool": {
+                    "should": [
+                        { "term": { "clients_status": "1" }},
+                        { "term": { "clients_verification_status": "1" }}
+                    ],
+                    "minimum_should_match": 1,
+                    "must_not": [ { "term": { "clients_status": "0" } } ]
+                  }},
+                { "range": { "ads_period_publication": { "gte": "now" }}}
+              ]
+            }
+          }
+        }
+=======
                 { "term":  { "ads_status": "1" }},
                 { "terms":  { "clients_status": [1] }},
                 { "range": { "ads_period_publication": { "gte": "now" }}}
@@ -148,6 +176,7 @@ class Elastic{
             }
           }
         }
+
     ';
 
     return json_decode($json, true);

@@ -120,7 +120,7 @@ if($page != 'shops'){
 
    }else{
 
-       $results = $Ads->getAll( array("navigation"=>false,"output"=>30,"query"=>"ads_status='1' and clients_status IN(0,1) and ads_period_publication > now() and ".$Filters->explodeSearch($query), "sort"=>"ORDER By ads_datetime_add DESC limit 30", "param_search" => $Elastic->paramAdSearch($query)));
+       $results = $Ads->getAll( array("navigation"=>false,"output"=>30,"query"=>"ads_status='1' and (clients_status=1 or clients_verification_status=1) and ads_period_publication > now() and ".$Filters->explodeSearch($query), "sort"=>"ORDER By ads_datetime_add DESC limit 30", "param_search" => $Elastic->paramAdSearch($query)));
 
        if($results["count"]){
 
@@ -153,7 +153,7 @@ if($settings["user_shop_status"]){
 if($page == 'shop'){
 
    if($getShop){
-       $results = $Ads->getAll( array("navigation"=>false,"output"=>10,"query"=>"ads_status='1' and clients_status IN(0,1) and ads_period_publication > now() and ads_id_user='".$getShop["clients_shops_id_user"]."' and ".$Filters->explodeSearch($query), "sort"=>"ORDER By ads_datetime_add DESC limit 10", "param_search" => $Elastic->paramAdSearch($query,$getShop["clients_shops_id_user"])));
+       $results = $Ads->getAll( array("navigation"=>false,"output"=>10,"query"=>"ads_status='1' and (clients_status=1 or clients_verification_status=1) and ads_period_publication > now() and ads_id_user='".$getShop["clients_shops_id_user"]."' and ".$Filters->explodeSearch($query), "sort"=>"ORDER By ads_datetime_add DESC limit 10", "param_search" => $Elastic->paramAdSearch($query,$getShop["clients_shops_id_user"])));
 
        if($results["count"]){
 
@@ -195,7 +195,7 @@ if($page == 'shop'){
         <div class="search-store-offers" >
         <?php
             foreach ($getShops as $key => $value) {
-               $count_ads = $Ads->getCount("ads_status='1' and clients_status IN(0,1) and ads_period_publication > now() and ads_id_user='{$value["clients_shops_id_user"]}'");
+               $count_ads = $Ads->getCount("ads_status='1' and (clients_status=1 or clients_verification_status=1) and ads_period_publication > now() and ads_id_user='{$value["clients_shops_id_user"]}'");
                ?>
                   <a href="<?php echo $Shop->linkShop($value["clients_shops_id_hash"]); ?>" > 
                     <div class="main-search-results-img" ><img src="<?php echo Exists($config["media"]["other"], $value["clients_shops_logo"], $config["media"]["no_image"]); ?>"></div>

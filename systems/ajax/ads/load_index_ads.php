@@ -80,7 +80,7 @@ if($ad_ids_interests){
 
 if($settings["index_out_content_method"] == 0){
 
-    $results = $Ads->getAll( ["sort"=>$sorting, "query"=>"ads_status='1' and clients_status IN(0,1) and ads_period_publication > now() $query", "navigation" => true, "page" => $page, "output" => $settings["index_out_content"], "param_search" => $param_search ] );
+    $results = $Ads->getAll( ["sort"=>$sorting, "query"=>"ads_status='1' and (clients_status=1 or clients_verification_status=1) and ads_period_publication > now() $query", "navigation" => true, "page" => $page, "output" => $settings["index_out_content"], "param_search" => $param_search ] );
 
 }else{
 
@@ -88,7 +88,7 @@ if($settings["index_out_content_method"] == 0){
         $geo = $Ads->queryGeo() ? " and " . $Ads->queryGeo() : "";
     }
 
-    $results = $Ads->getAll( ["sort"=>$sorting, "query"=>"ads_status='1' and clients_status IN(0,1) and ads_period_publication > now() $query $geo", "navigation" => true, "page" => $page, "output" => $settings["index_out_content"], "param_search" => $param_search ] );
+    $results = $Ads->getAll( ["sort"=>$sorting, "query"=>"ads_status='1' and (clients_status=1 or clients_verification_status=1) and ads_period_publication > now() $query $geo", "navigation" => true, "page" => $page, "output" => $settings["index_out_content"], "param_search" => $param_search ] );
 
 }
 

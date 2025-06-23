@@ -37,7 +37,7 @@ $_GET["output"] = $_GET["output"] ? intval($_GET["output"]) : 50;
 
 if($_GET["status"] != "all"){
   if($_GET["status"] == 1){
-  	 $query[] = "clients_status IN(0,1) and ads_period_publication > now() and ads_status='1'";
+  	 $query[] = "(clients_status=1 or clients_verification_status=1) and ads_period_publication > now() and ads_status='1'";
   }else{
   	 $query[] = "ads_status='".intval($_GET["status"])."'";
   }

@@ -1,6 +1,6 @@
 <?php
 $ratings = $Profile->outRating( $value["clients_shops_id_user"] );
-$count_ads = $Ads->getCount("ads_status='1' and clients_status IN(0,1) and ads_period_publication > now() and ads_id_user='{$value["clients_id"]}'");
+$count_ads = $Ads->getCount("ads_status='1' and (clients_status=1 or clients_verification_status=1) and ads_period_publication > now() and ads_id_user='{$value["clients_id"]}'");
 $get_shop_slider = findOne('uni_clients_shops_slider','clients_shops_slider_id_shop=? order by clients_shops_slider_id asc', [$value["clients_shops_id"]]);
 ?>
 <div class="col-lg-3 col-md-4 col-sm-6 col-12" >

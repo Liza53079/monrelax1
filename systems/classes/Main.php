@@ -959,7 +959,7 @@ class Main{
               $param_search["query"]["bool"]["filter"][]["term"] = $Ads->arrayGeo();
               $param_search["query"]["bool"]["filter"][]["terms"]["ads_id_cat"] = $list_cats;
               
-              $getAds = $Ads->getAll( ["query"=>"ads_status='1' and clients_status IN(0,1) and ads_period_publication > now() and ads_id_cat IN(".$list_cats.") $geo order by ads_id desc limit $output", "param_search" => $param_search, "output" => $output ] );
+              $getAds = $Ads->getAll( ["query"=>"ads_status='1' and (clients_status=1 or clients_verification_status=1) and ads_period_publication > now() and ads_id_cat IN(".$list_cats.") $geo order by ads_id desc limit $output", "param_search" => $param_search, "output" => $output ] );
               if( $getAds["count"] ){
                   
                   foreach ($getAds["all"] as $key => $value) {

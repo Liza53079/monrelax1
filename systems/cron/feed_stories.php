@@ -60,7 +60,7 @@ shuffle($results);
 
 // Новые объявления
 
-$getAds = $Ads->getAll(["query"=>"ads_status='1' and clients_status IN(0,1) and ads_period_publication > now() and ads_datetime_add >= DATE_SUB(NOW() , INTERVAL 60 MINUTE)"]);
+$getAds = $Ads->getAll(["query"=>"ads_status='1' and (clients_status=1 or clients_verification_status=1) and ads_period_publication > now() and ads_datetime_add >= DATE_SUB(NOW() , INTERVAL 60 MINUTE)"]);
 
 if($getAds['count']){
   foreach ($getAds['all'] as $key => $value) {

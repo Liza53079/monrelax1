@@ -22,7 +22,7 @@ if($id_ad && $id_cat && $settings["ad_similar_count"]){
   $param_search["query"]["bool"]["filter"][]["terms"]["ads_id_cat"] = explode(",", $ids_cat);
   $param_search["sort"]["ads_sorting"] = [ "order" => "desc" ];
 
-  $data["similar"] = $Ads->getAll( [ "query" => "ads_id_cat IN(".$ids_cat.") and clients_status IN(0,1) and ads_status='1' and ads_period_publication > now() and ads_id!=".$id_ad." {$ads_id_user} order by ads_sorting desc limit " . $settings["ad_similar_count"], "param_search" => $param_search, "output" => $settings["ad_similar_count"] ] );
+  $data["similar"] = $Ads->getAll( [ "query" => "ads_id_cat IN(".$ids_cat.") and (clients_status=1 or clients_verification_status=1) and ads_status='1' and ads_period_publication > now() and ads_id!=".$id_ad." {$ads_id_user} order by ads_sorting desc limit " . $settings["ad_similar_count"], "param_search" => $param_search, "output" => $settings["ad_similar_count"] ] );
 
    if($data["similar"]["all"]){
 

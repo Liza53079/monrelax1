@@ -161,7 +161,7 @@ if( count($getClientsSubscriptions) ){
 
         if( $getShop && $value["clients_subscriptions_time_update"] ){
 
-            $results = $Ads->getAll( array( "query"=>"ads_status='1' and clients_status IN(0,1) and ads_period_publication > now() and ads_id_user='".$value["clients_subscriptions_id_user_to"]."' and ads_datetime_add > '".$value["clients_subscriptions_time_update"]."'" ) );
+            $results = $Ads->getAll( array( "query"=>"ads_status='1' and (clients_status=1 or clients_verification_status=1) and ads_period_publication > now() and ads_id_user='".$value["clients_subscriptions_id_user_to"]."' and ads_datetime_add > '".$value["clients_subscriptions_time_update"]."'" ) );
 
             if( $results["count"] ){
 
