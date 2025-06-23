@@ -28,6 +28,7 @@ if(!$_SESSION["verify_login"][$user_login]["code"] || $_SESSION["verify_login"][
 if(!$error){
 
  unset($_SESSION["auth_captcha"]);
+ $_SESSION['reg_data']['email_verified'] = true;
  echo json_encode( array( "status"=>true ) );
 
 }else{

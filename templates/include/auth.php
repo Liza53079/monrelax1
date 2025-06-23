@@ -82,23 +82,39 @@
     <?php } ?>
 
     <div class="auth-block-right-box-tab-1-1" >
-      
-      <?php if($settings["registration_method"] == 1){ ?>
-      <div class="input-phone-format" >
-      
-        <input type="text"  class="form-control input-style2-custom phone-mask" data-format="<?php echo getFormatPhone(); ?>" placeholder="<?php echo $ULang->t("Номер телефона"); ?>" name="user_login">
-        
-        <?php echo outBoxChangeFormatPhone(); ?>
 
-      </div>
-      <?php }elseif($settings["registration_method"] == 2){ ?>
-      <input type="text"  class="form-control input-style2-custom" placeholder="<?php echo $ULang->t("Телефон или электронная почта"); ?>" name="user_login">
-      <?php }elseif($settings["registration_method"] == 3){ ?>
+      <input type="text"  class="form-control input-style2-custom" placeholder="<?php echo $ULang->t("Ваше имя"); ?>" name="name">
+      <div class="msg-error mb10" data-name="name" ></div>
+
+      <input type="number"  class="form-control input-style2-custom" placeholder="<?php echo $ULang->t("Возраст"); ?>" name="age">
+      <div class="msg-error mb10" data-name="age" ></div>
+
+      <select class="form-control input-style2-custom" name="gender">
+        <option value="male" ><?php echo $ULang->t("Мужской"); ?></option>
+        <option value="female" ><?php echo $ULang->t("Женский"); ?></option>
+        <option value="other" ><?php echo $ULang->t("Другой"); ?></option>
+      </select>
+      <div class="msg-error mb10" data-name="gender" ></div>
+
+      <select class="form-control input-style2-custom" name="role">
+        <option value="sponsor" ><?php echo $ULang->t("Спонсор"); ?></option>
+        <option value="model" ><?php echo $ULang->t("Модель"); ?></option>
+      </select>
+      <div class="msg-error mb10" data-name="role" ></div>
+
+      <select class="form-control input-style2-custom" name="looking_for">
+        <option value="male" ><?php echo $ULang->t("Ищу мужчину"); ?></option>
+        <option value="female" ><?php echo $ULang->t("Ищу женщину"); ?></option>
+        <option value="both" ><?php echo $ULang->t("Ищу всех"); ?></option>
+      </select>
+      <div class="msg-error mb10" data-name="looking_for" ></div>
+
+      <input type="text"  class="form-control input-style2-custom" placeholder="<?php echo $ULang->t("Город"); ?>" name="city">
+      <div class="msg-error mb10" data-name="city" ></div>
+
       <input type="text"  class="form-control input-style2-custom" placeholder="<?php echo $ULang->t("Электронная почта"); ?>" name="user_login">
-      <?php } ?>
-      
       <div class="msg-error mb10" data-name="user_login" ></div>
-  
+
       <div class="auth-captcha" style="display: block;" >
         <div class="row" >
           <div class="col-lg-4 col-12" ><img src="" ></div>
@@ -106,7 +122,7 @@
         </div>
         <div class="msg-error mb10" data-name="captcha" ></div>
       </div>
-  
+
       <button class="button-style-custom schema-color-button color-green action-reg-send mt20" ><?php echo $ULang->t("Продолжить"); ?></button>
 
     </div>
@@ -128,14 +144,38 @@
     </div>
 
     <div class="auth-block-right-box-tab-1-3" >
+      <form class="reg-finish-form" enctype="multipart/form-data">
 
-      <input type="text"  class="form-control input-style2-custom" placeholder="<?php echo $ULang->t("Ваше имя"); ?>" name="user_name">
-      <div class="msg-error mb10" data-name="user_name" ></div>
+        <input type="file" name="avatar" class="form-control mb10" >
+        <div class="msg-error mb10" data-name="avatar" ></div>
 
-      <input type="password"  class="form-control input-style2-custom" placeholder="<?php echo $ULang->t("Пароль"); ?>" maxlength="25" name="user_pass">
-      <div class="msg-error mb10" data-name="user_pass" ></div>
+        <textarea class="form-control mb10" name="description" placeholder="<?php echo $ULang->t("Описание"); ?>"></textarea>
+        <div class="msg-error mb10" data-name="description" ></div>
 
-      <button class="button-style-custom schema-color-button color-green action-reg-finish mt20" ><?php echo $ULang->t("Завершить регистрацию"); ?></button>           
+        <?php $preferences = getAll('select * from sex_preferences'); ?>
+        <?php if($preferences){ ?>
+          <div class="mb10 preferences-box">
+            <?php foreach($preferences as $pref){ ?>
+              <label class="checkbox mr10"><input type="checkbox" name="preferences[]" value="<?php echo $pref['id']; ?>"><span></span><?php echo $pref['name']; ?></label>
+            <?php } ?>
+          </div>
+        <?php } ?>
+
+        <input type="text"  class="form-control input-style2-custom" placeholder="<?php echo $ULang->t("Телефон"); ?>" name="phone">
+        <div class="msg-error mb10" data-name="phone" ></div>
+
+        <input type="password"  class="form-control input-style2-custom" placeholder="<?php echo $ULang->t("Пароль"); ?>" maxlength="25" name="user_pass">
+        <div class="msg-error mb10" data-name="user_pass" ></div>
+
+        <input type="text" class="form-control input-style2-custom" placeholder="<?php echo $ULang->t("Социальные сети"); ?>" name="social_links">
+        <div class="msg-error mb10" data-name="social_links" ></div>
+
+        <input type="file" name="gesture" class="form-control mb10" >
+        <div class="msg-error mb10" data-name="gesture" ></div>
+
+        <button class="button-style-custom schema-color-button color-green action-reg-finish mt20" ><?php echo $ULang->t("Завершить регистрацию"); ?></button>
+
+      </form>
     </div>
 
     <?php if($settings["authorization_social"]){ ?>

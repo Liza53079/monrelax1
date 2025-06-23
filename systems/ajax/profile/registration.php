@@ -3,6 +3,31 @@
 $error = [];
 
 $user_login = clear($_POST["user_login"]);
+$name = clear($_POST["name"]);
+$age = (int)$_POST["age"];
+$gender = clear($_POST["gender"]);
+$role = clear($_POST["role"]);
+$looking_for = clear($_POST["looking_for"]);
+$city = clear($_POST["city"]);
+
+if(!$name){
+  $error["name"] = $ULang->t("Пожалуйста, укажите Ваше имя");
+}
+if($age < 18){
+  $error["age"] = $ULang->t("Возраст должен быть не меньше 18");
+}
+if(!$gender){
+  $error["gender"] = $ULang->t("Укажите пол");
+}
+if(!$role){
+  $error["role"] = $ULang->t("Укажите роль");
+}
+if(!$looking_for){
+  $error["looking_for"] = $ULang->t("Укажите кого ищете");
+}
+if(!$city){
+  $error["city"] = $ULang->t("Укажите город");
+}
 
 if($settings["registration_method"] == 1){
 
@@ -55,6 +80,16 @@ $error["captcha"] = $ULang->t("Неверный код с картинки");
 }
 
 if(!$error){
+
+ $_SESSION['reg_data'] = [
+   'name' => $name,
+   'age' => $age,
+   'gender' => $gender,
+   'role' => $role,
+   'looking_for' => $looking_for,
+   'city' => $city,
+   'email' => $user_email
+ ];
 
  if($user_email){
     $getUser = findOne("uni_clients","clients_email = ?", array( $user_email ));

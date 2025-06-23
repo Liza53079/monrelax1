@@ -94,7 +94,7 @@ $(document).ready(function () {
 
       showLoadProcess(this_);
 
-      $.ajax({type: "POST",url: url_path + "systems/ajax/controller.php",data: "user_login=" + $(".auth-block-tab-reg input[name=user_login]").val() + "&captcha=" + $(".auth-block-tab-reg input[name=captcha]").val() + "&action=profile/registration",dataType: "json",cache: false,success: function (data) { 
+      $.ajax({type: "POST",url: url_path + "systems/ajax/controller.php",data: "name=" + $(".auth-block-tab-reg input[name=name]").val() + "&age=" + $(".auth-block-tab-reg input[name=age]").val() + "&gender=" + $(".auth-block-tab-reg select[name=gender]").val() + "&role=" + $(".auth-block-tab-reg select[name=role]").val() + "&looking_for=" + $(".auth-block-tab-reg select[name=looking_for]").val() + "&city=" + $(".auth-block-tab-reg input[name=city]").val() + "&user_login=" + $(".auth-block-tab-reg input[name=user_login]").val() + "&captcha=" + $(".auth-block-tab-reg input[name=captcha]").val() + "&action=profile/registration",dataType: "json",cache: false,success: function (data) {
 
          if( data["status"] == true ){
              
@@ -183,7 +183,12 @@ $(document).ready(function () {
       
       showLoadProcess(this_);
 
-      $.ajax({type: "POST",url: url_path + "systems/ajax/controller.php",data: "user_login=" + $(".auth-block-tab-reg input[name=user_login]").val() + "&user_code_login=" + $(".auth-block-tab-reg input[name=user_code_login]").val() + "&user_pass=" + $(".auth-block-tab-reg input[name=user_pass]").val() + "&user_name=" + $(".auth-block-tab-reg input[name=user_name]").val() + "&action=profile/reg_finish",dataType: "json",cache: false,success: function (data) { 
+      var form = $('.reg-finish-form')[0];
+      var data_form = new FormData(form);
+      data_form.append('user_login', $(".auth-block-tab-reg input[name=user_login]").val());
+      data_form.append('user_code_login', $(".auth-block-tab-reg input[name=user_code_login]").val());
+      data_form.append('action','profile/reg_finish');
+      $.ajax({type: "POST",url: url_path + "systems/ajax/controller.php",data: data_form,dataType: "json",cache: false,contentType: false,processData: false,success: function (data) {
 
          if( data["status"] == true ){
             
