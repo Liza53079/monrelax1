@@ -10,7 +10,7 @@ class Elastic{
 
     if(!$config["elasticsearch"]["status"]){ return false; }
 
-		$this->$client = ClientBuilder::create()->build();
+                $this->client = ClientBuilder::create()->build();
 
 	}
 
@@ -206,7 +206,7 @@ class Elastic{
 
 	    	try{
 
-	    		return $this->$client->index($params);
+                        return $this->client->index($params);
 
 	    	} catch (Exception $e) {
 
@@ -237,7 +237,7 @@ class Elastic{
 
 	    	try{
 
-	    		return $this->$client->update($params);
+                        return $this->client->update($params);
 
 	    	} catch (Exception $e) {
 
@@ -256,7 +256,7 @@ class Elastic{
         
 	    	try{
 
-	    		return $this->$client->delete($params);
+                        return $this->client->delete($params);
 
 	    	} catch (Exception $e) {
 
@@ -275,7 +275,7 @@ class Elastic{
 
 	    	try{
 
-	    		return $this->$client->get($params);
+                        return $this->client->get($params);
 
 	    	} catch (Exception $e) {
 
@@ -294,7 +294,7 @@ class Elastic{
       
     	try{
 
-    		return $this->$client->search($params);
+                return $this->client->search($params);
 
     	} catch (Exception $e) {
 
