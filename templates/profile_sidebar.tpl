@@ -36,7 +36,10 @@
         }
     }                        
  ?>
- <p><?php echo $ULang->t("На"); ?> <?php echo $ULang->t($settings["site_name"]); ?> <?php echo $ULang->t("с"); ?> <?php echo date("d.m.Y", strtotime($user["clients_datetime_add"])); ?></p>  
+<p><?php echo $ULang->t("На"); ?> <?php echo $ULang->t($settings["site_name"]); ?> <?php echo $ULang->t("с"); ?> <?php echo date("d.m.Y", strtotime($user["clients_datetime_add"])); ?></p>
+<?php if($data["advanced"]){ ?>
+<p><?php echo $ULang->t("Осталось чатов сегодня"); ?>: <?php $ChatLimits=new ChatLimits(); echo $ChatLimits->remainingChats($_SESSION['profile']['id']); ?></p>
+<?php } ?>
 
  <div class="board-view-stars">
      
