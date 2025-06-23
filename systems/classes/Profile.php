@@ -1483,6 +1483,10 @@ class Profile{
           if($output_param["action"] == "balance"){
 
              $this->actionBalance(array("id_user"=>$output_param["id_user"],"summa"=>$output_param["amount"],"title"=>$output_param["title"],"id_order"=>generateOrderId(),"email" => $user["clients_email"],"name" => $user["clients_name"], "note" => $output_param["title"]),"+");
+             if($settings['chat_bonus_topup']){
+                 $ChatLimits = new ChatLimits();
+                 $ChatLimits->addBonus($output_param['id_user'], intval($settings['chat_bonus_topup']));
+             }
 
              if($settings["bonus_program"]["balance"]["status"] && $settings["bonus_program"]["balance"]["price"]){
                  $bonus = $this->calcBonus($output_param["amount"]);
