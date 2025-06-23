@@ -18,9 +18,22 @@
          <div>
            <button class="button-style-custom color-light button-click-close" ><?php echo $ULang->t("Отменить"); ?></button>
          </div>                                       
-      </div>
+</div>
 
+</div>
+
+<div class="modal-custom-bg" id="modal-send-gift" style="display:none;">
+    <div class="modal-custom animation-modal" style="max-width:400px">
+        <span class="modal-custom-close"><i class="las la-times"></i></span>
+        <div class="modal-custom-content text-center">
+            <h4><?php echo $ULang->t("Отправить подарок"); ?></h4>
+            <p><?php echo $ULang->t("Выберите подарок для отправки пользователю."); ?></p>
+            <div class="send-gift-options mt20">
+                <button class="button-style-custom color-blue"><?php echo $ULang->t("Отправить"); ?></button>
+            </div>
+        </div>
     </div>
+</div>
 </div>
 
 <div class="modal-custom-bg" style="display: none;" id="modal-edit-email" >
