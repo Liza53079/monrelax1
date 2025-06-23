@@ -2354,7 +2354,7 @@ class Profile{
                                 </div>
                             </div>
                         </div>                
-                        <?
+                        <?php
                     }
 
                 }
