@@ -1,3 +1,4 @@
+<?php $prefList = getAll("SELECT * FROM sex_preferences"); ?>
 
 <div class="auth-block-tabs" >
    <span data-tab="1" class="active" ><?php echo $ULang->t("Войти"); ?></span>
@@ -135,6 +136,16 @@
       <input type="password"  class="form-control input-style2-custom" placeholder="<?php echo $ULang->t("Пароль"); ?>" maxlength="25" name="user_pass">
       <div class="msg-error mb10" data-name="user_pass" ></div>
 
+<?php if($prefList){ ?>
+  <div class="mb10"><?php echo $ULang->t("Предпочтения"); ?>:</div>
+  <?php foreach($prefList as $pref){ ?>
+  <div class="custom-control custom-checkbox mb5">
+     <input type="checkbox" class="custom-control-input" id="pref_<?php echo $pref[id]; ?>" name="preferences[]" value="<?php echo $pref[id]; ?>">
+     <label class="custom-control-label" for="pref_<?php echo $pref[id]; ?>"><?php echo $pref[name]; ?></label>
+  </div>
+  <?php } ?>
+  <div class="msg-error mb10" data-name="preferences" ></div>
+<?php } ?>
       <button class="button-style-custom schema-color-button color-green action-reg-finish mt20" ><?php echo $ULang->t("Завершить регистрацию"); ?></button>           
     </div>
 

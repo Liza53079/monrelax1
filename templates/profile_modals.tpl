@@ -1,3 +1,4 @@
+<?php $verificationGesture = getOne("SELECT * FROM gestures ORDER BY RAND() LIMIT 1"); ?>
 <div class="modal-custom-bg" style="display: none;" id="modal-edit-pass" >
     <div class="modal-custom animation-modal" style="max-width: 400px" >
 
@@ -359,10 +360,14 @@
           <div class="modal-user-verification-change-doc-img" > <img src=""> </div>
 
           <div class="modal-user-verification-change-photo" > <?php echo $ULang->t("Прикрепить своё фото"); ?> </div>
-          <p><?php echo $ULang->t("Сделайте селфи вашего лица вместе с листочком на котором напишите цифры"); ?> <strong><?php echo $user["clients_verification_code"]; ?></strong> </p>
-
+          <p><?php echo $ULang->t("Сделайте селфи вашего лица вместе с листочком на котором напишите цифры"); ?> <strong><?php echo $user["clients_verification_code"]; ?></strong></p>
           <div class="modal-user-verification-change-photo-img" > <img src=""> </div>
 
+<?php if($verificationGesture){ ?>
+<p><?php echo $ULang->t("Также повторите жест на изображении"); ?>:</p>
+<img src="<?php echo Exists($config["media"]["other"],$verificationGesture["image"],$config["media"]["no_image"]); ?>" alt="<?php echo $verificationGesture["description"]; ?>" width="100">
+<p><?php echo $verificationGesture["description"]; ?></p>
+<?php } ?>
           <form class="modal-user-verification-form" >
             <input type="file" name="doc">
             <input type="file" name="photo">
